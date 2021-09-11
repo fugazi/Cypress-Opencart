@@ -1,20 +1,21 @@
-### End-to-End Automation Testing with Cypress
+## 👋 End-to-End Automation Testing with Cypress
 This is a example of End-to-End Automation Testing with Cypress, developed by Douglas Urrea Ocampo using Cypress as framework.
 Otherwise I am testing a Democart hompepage to practicing writing advanced tests in Cypress
 
-### Tester details
+## 🏠 Tester details
 * Name: `Douglas Urrea Ocampo`
 * Country: `Colombia`
+* City: `Medellin`
 * E-mail: `douglas`
 * LinkedIn: [https://www.linkedin.com/in/douglasfugazi](douglasfugazi)
 * Contact: [https://douglasfugazi.co](https://douglasfugazi.co)
 
-### Pre-requisites:
+## ✨ Pre-requisites:
 1. Install Node.js from [here](https://nodejs.org/en/)
 2. Install npm from [here](https://www.npmjs.com)
 3. Install git from [here](https://git-scm.com)
 
-### Running the project:
+## 🛠️ Running the project:
 1. Download the project from GitHub
     * Option 1: `git clone https://github.com/fugazi/Cypress-Opencart.git`
     * Option 2: Download it as a Zip file and extract it
@@ -28,11 +29,11 @@ Otherwise I am testing a Democart hompepage to practicing writing advanced tests
 5. run `npx eyes-setup`
 6. run `npm test`
 
-### Cypress tutorial
+### ✏️ Cypress tutorial
 
 Please see https://applitools.com/tutorials/cypress.html for all the details.
 
-### Project configuration
+### 🚴 Project configuration
 * Cypress project Baseline: `TestProject1.spec.js` into folder `cypress\integration`
 * Cypress project Checkpoint: `ModernTestsV2.spec.js` into folder `cypress\integration`
 * batchName: `Democart`
