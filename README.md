@@ -7,7 +7,7 @@ Otherwise I am testing a Democart hompepage to practicing writing advanced tests
 * Country: `Colombia`
 * City: `Medellin`
 * E-mail: `douglas`
-* LinkedIn: [https://www.linkedin.com/in/douglasfugazi](douglasfugazi)
+* LinkedIn: [https://www.linkedin.com/in/douglasfugazi](https://www.linkedin.com/in/douglasfugazi)
 * Contact: [https://douglasfugazi.co](https://douglasfugazi.co)
 
 ## ✨ Pre-requisites:
