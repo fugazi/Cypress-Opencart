@@ -1,6 +1,6 @@
 ## 👋 End-to-End Automation Testing with Cypress
 This is a example of End-to-End Automation Testing with Cypress, developed by Douglas Urrea Ocampo using Cypress as framework.
-Otherwise I am testing a Democart hompepage to practicing writing advanced tests in Cypress
+Besides I am testing a Democart homepage to practicing writing advanced tests in Cypress
 
 ## 🏠 Tester details
 * Name: `Douglas Urrea Ocampo`
