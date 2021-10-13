@@ -13,6 +13,6 @@
   "author": "Douglas Fugazi",
   "license": "ISC",
   "devDependencies": {
-    "cypress": "^8.3.1"
+    "cypress": "^8.6.0"
   }
 }
