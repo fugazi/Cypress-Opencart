@@ -35,7 +35,7 @@ Please see https://applitools.com/tutorials/cypress.html for all the details.
 
 ### 🚴 Project configuration
 * Cypress project Baseline: `TestProject1.spec.js` into folder `cypress\integration`
-* Cypress project Checkpoint: `ModernTestsV2.spec.js` into folder `cypress\integration`
+* Cypress project Checkpoint-Register: `TestProject2.spec.js` into folder `cypress\integration`
 * batchName: `Democart`
 * appName: `Opencart`
 * testName: `Cross-Device Elements Test`
