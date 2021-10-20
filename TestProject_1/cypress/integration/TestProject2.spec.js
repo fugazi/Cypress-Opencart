@@ -32,7 +32,7 @@ describe('Create a new Account at Democart', () => {
 
         cy.get('#input-email')
         .should('be.visible')
-        .type('john-doe@example.com')
+        .type('john-doe1@example.com')
 
         cy.get('#input-telephone')
         .should('be.visible')

@@ -1,0 +1,73 @@
+/// <reference types="cypress" />
+
+// This is a example of End-to-End Automation Testing with Cypress
+// Besides I am testing a Democart hompepage to practicing writing advanced tests in Cypress
+// https://douglasfugazi.co
+
+describe('Check that user was redirected to the correct URL at Democart', () => {
+    it('Visit Homepage - Democart', () => {
+        cy.visit('https://demo.opencart.com')
+        //cy.login('john-doe1@example.com', 'demo')
+    });
+
+    it('Verify the login page', () => {
+        cy.get('.list-inline > .dropdown > .dropdown-toggle')
+        .should('be.visible')
+        .click()
+        cy.get('.dropdown-menu > :nth-child(2) > a')
+        .should('be.visible')
+        .click()
+
+        cy.url()
+        .should('contain', 'account/login')
+        
+        cy.get('h2')
+        .should('be.visible')
+        
+        cy.contains('Returning Customer')
+    });
+
+    it('Do Login access to user', () => {
+        cy.get('#input-email')
+        .should('be.visible')
+        .type('john-doe1@example.com')
+
+        cy.get('#input-password')
+        .should('be.visible')
+        .type('demo')
+
+        cy.contains('a', 'Forgotten Password')
+        .should('have.attr', 'href')
+
+        cy.get('form > .btn')
+        .should('be.visible')
+        .click()
+
+        cy.get('#content > h2:first')
+        .should('have.text', 'My Account')
+    });
+
+    it('Do Logout to Account', () => {
+        cy.get('.list-group > a:last')
+        .should('have.text', 'Logout')
+        .click()
+
+        cy.url()
+        .should('contain', 'account/logout')
+
+        cy.get('h1:last')
+        .should('have.text', 'Account Logout')
+        
+        cy.get('.pull-right > .btn')
+        .should('be.visible')
+        .click()
+
+        cy.url()
+        .should('contain', 'common/home')
+    });
+});
+
+// In this test we have learned how to get the current URL of the page that is currently active using cy.url()
+// Pass in an options object to change the default behavior of cy.url()
+// Also I am ensuring that they are visible (.should('be.visible')). This makes the test more robust.
+// Finally, I've verified how to get the first/last DOM element within a set of DOM elements with the command (:first) and (:last)
