@@ -8,8 +8,7 @@ describe('Visit Homepage - Democart', () => {
     beforeEach(() => {
         cy.visit('https://demo.opencart.com')
     })
-    
-    
+        
     it('Validate the principal container at Homepage', () => {
         cy.get('h1 > a').should('have.text', 'Your Store')
         cy.get('h3').should('have.text', 'Featured')
