@@ -31,7 +31,8 @@ Besides I am testing a Democart homepage to practicing writing advanced tests in
 
 ### ✏️ Cypress tutorial
 
-Please see https://applitools.com/tutorials/cypress.html for all the details.
+Please see => [here](https://applitools.com/tutorials/cypress.html) for all the details.
+Cypress Best Practices => [here](https://dev.to/cypress/cypress-best-practices-55j0)
 
 ### 🚴 Project configuration
 * Cypress project Baseline: `TestProject1.spec.js` into folder `cypress\integration`
