@@ -7,7 +7,7 @@
 describe('Test API with Cypress', () => {
     beforeEach(() => {
         cy.request({
-            method: 'GET',
+            method: 'POST',
             url: 'https://serverest.dev/usuarios',
         }).as('getUsers');
     });
