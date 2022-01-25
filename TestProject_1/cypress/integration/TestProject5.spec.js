@@ -145,3 +145,27 @@ describe('Tests API with Cypress: GET method /usuarios', () => {
 });
 });
 });
+
+// This example above let you test API with Cypress
+// To GET method /usuarios verify the method passing id query param from https://serverest.dev/usuarios and verify the response
+// Then it should return only the filtered user by name
+
+describe('Tests API with Cypress: GET method /produtos', () => {
+    it('GET produtos - Verify the method passing id query param - Then it should return only the filtered user', () => {
+        cy.request({
+            method: 'GET',
+            url: 'https://serverest.dev/produtos',
+            qs: {
+                _id: 'cr6s7wbMd3B7mKk7'
+            }        
+    })
+    .should((response) => {
+        expect(response.status).to.eq(200)
+        expect(response.body.produtos[0].descricao).to.eq('AMD Basix pc básico')
+});
+});
+});
+
+// This example above let you test API with Cypress
+// To GET method /produtos verify the method passing id query param from https://serverest.dev/usuarios and verify the response
+// Then it should return only the filtered product by description
