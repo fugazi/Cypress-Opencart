@@ -29,10 +29,10 @@ describe('Tests API with Cypress: GET method /usuarios', () => {
         cy.get('@getUsers').should((response) => {
             expect(response.status).to.eq(200)
             expect(response.body.usuarios[0]).to.have.all.keys('nome', 'email', 'password', 'administrador', '_id')
-            expect(response.body.usuarios[0].nome).to.equal('Fulano da Silva')
-            expect(response.body.usuarios[0].email).to.equal('fulano@qa.com')
+            expect(response.body.usuarios[0].nome).to.equal('Mr. Cameron Davis')
+            expect(response.body.usuarios[0].email).to.equal('pete.goldner@gmail.com')
             expect(response.body.usuarios[0].password).to.not.be.null
-            expect(response.body.usuarios[0]._id).to.equal('YwPto0xmVh3UYN1Q')
+            expect(response.body.usuarios[0]._id).to.equal('0JyiSHdlrjwL1aD6')
         });
     });
 });
@@ -67,11 +67,11 @@ describe('Tests API with Cypress: GET method /produtos', () => {
         cy.get('@getProducts').should((response) => {
             expect(response.status).to.eq(200)
             expect(response.body.produtos[0]).to.have.all.keys('nome', 'preco', 'descricao', 'quantidade', '_id')
-            expect(response.body.produtos[0].nome).to.equal('LG monitor curvo WS modelo 3182')
-            expect(response.body.produtos[0].preco).to.equal(2500)
-            expect(response.body.produtos[0].descricao).to.equal('Monitor')
-            expect(response.body.produtos[0].quantidade).to.equal(10)
-            expect(response.body.produtos[0]._id).to.equal('2LVx3C7ifmbnGaGz')
+            expect(response.body.produtos[0].nome).to.equal('Logitech MX Vertical')
+            expect(response.body.produtos[0].preco).to.equal(470)
+            expect(response.body.produtos[0].descricao).to.equal('MoMousenitor')
+            expect(response.body.produtos[0].quantidade).to.equal(381)
+            expect(response.body.produtos[0]._id).to.equal('BeeJh5lz3k6kSIzA')
         });
     });
 });
@@ -136,12 +136,12 @@ describe('Tests API with Cypress: GET method /usuarios', () => {
             method: 'GET',
             url: 'https://serverest.dev/usuarios',
             qs: {
-                _id: '9gMmQFtImsRJuzH7'
+                _id: 'fuLoEh8YJP1wSR3Q'
             }    
     })
     .should((response) => {
         expect(response.status).to.eq(200)
-        expect(response.body.usuarios[0].nome).to.eq('Josias Valentim')
+        expect(response.body.usuarios[0].nome).to.eq('Miss Stacey Nienow')
 });
 });
 });
@@ -156,12 +156,12 @@ describe('Tests API with Cypress: GET method /produtos', () => {
             method: 'GET',
             url: 'https://serverest.dev/produtos',
             qs: {
-                _id: 'cr6s7wbMd3B7mKk7'
+                _id: 'K6leHdftCeOJj8BJ'
             }        
     })
     .should((response) => {
         expect(response.status).to.eq(200)
-        expect(response.body.produtos[0].descricao).to.eq('AMD Basix pc básico')
+        expect(response.body.produtos[0].descricao).to.eq('TV')
 });
 });
 });
