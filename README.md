@@ -35,8 +35,8 @@ Please see => [here](https://applitools.com/tutorials/cypress.html) for all the 
 Cypress Best Practices => [here](https://dev.to/cypress/cypress-best-practices-55j0)
 
 ### 🚴 Project configuration
-* Cypress project Baseline: `TestProject1.spec.js` into folder `cypress\integration`
-* Cypress project Checkpoint-Register: `TestProject2.spec.js` into folder `cypress\integration`
+* Cypress project Baseline: `TestProject1.spec.js` into folder `cypress\e2e`
+* Cypress project Checkpoint-Register: `TestProject2.spec.js` into folder `cypress\e2e`
 * batchName: `Democart`
 * appName: `Opencart`
 * testName: `Cross-Device Elements Test`

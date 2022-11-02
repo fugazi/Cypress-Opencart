@@ -10,11 +10,12 @@ describe('Visit Homepage - Democart', () => {
     })
         
     it('Validate the principal container at Homepage', () => {
-        cy.get('h1 > a').should('have.text', 'Your Store')
+        cy.get('#logo').should('be.visible')
         cy.get('h3').should('have.text', 'Featured')
         cy.get('[type="button"]').children()
         cy.get('#menu').should('have.class', 'navbar')
-        cy.get('#carousel0').should('have.class', 'swiper-container')
+        cy.get('#content').should('have.class', 'col')
+        cy.get('footer > .container').should('have.class', 'container')
         
     });
 
@@ -22,6 +23,6 @@ describe('Visit Homepage - Democart', () => {
         cy.get('head title').should('contain', 'Your Store')
         cy.get('head meta[name="description"]').should('have.attr', 'content', 'My Store')
         cy.get('head meta[name="viewport"]').should('have.attr', 'content', 'width=device-width, initial-scale=1')
-        cy.get('h1').should('be.visible')
+        cy.get('h3').should('be.visible')
     });
 });
