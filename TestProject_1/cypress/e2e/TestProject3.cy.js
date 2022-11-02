@@ -10,11 +10,11 @@ describe('Check that user was redirected to the correct URL at Democart', () => 
         //cy.login('john-doe1@example.com', 'demo')
     });
 
-    it('Verify the login page', () => {
-        cy.get('.list-inline > .dropdown > .dropdown-toggle')
+    it('Verify the Login Page', () => {
+        cy.get(':nth-child(2) > .dropdown > .dropdown-toggle > .d-none')
         .should('be.visible')
         .click()
-        cy.get('.dropdown-menu > :nth-child(2) > a')
+        cy.get(':nth-child(2) > .dropdown > .dropdown-menu > :nth-child(2) > .dropdown-item')
         .should('be.visible')
         .click()
 
@@ -39,12 +39,12 @@ describe('Check that user was redirected to the correct URL at Democart', () => 
         cy.contains('a', 'Forgotten Password')
         .should('have.attr', 'href')
 
-        cy.get('form > .btn')
+        cy.get('#form-login > .btn')
         .should('be.visible')
         .click()
 
-        cy.get('#content > h2:first')
-        .should('have.text', 'My Account')
+        cy.get('#form-login > h2')
+        .should('have.text', 'Returning Customer')
     });
 
     it('Do Logout to Account', () => {
