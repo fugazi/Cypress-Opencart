@@ -35,6 +35,7 @@ Please see => [here](https://applitools.com/tutorials/cypress.html) for all the 
 Cypress Best Practices => [here](https://dev.to/cypress/cypress-best-practices-55j0)
 
 ### 🚴 Project configuration
+* Website under Test: [Demo OpenCart](https://demo.opencart.com)
 * Cypress project Baseline: `TestProject1.spec.js` into folder `cypress\e2e`
 * Cypress project Checkpoint-Register: `TestProject2.spec.js` into folder `cypress\e2e`
 * batchName: `Democart`
