@@ -23,5 +23,9 @@
   "homepage": "https://github.com/fugazi/Cypress-Opencart#readme",
   "dependencies": {
     "cypress": "^12.17.2"
+  },
+  "devDependencies": {
+    "axe-core": "^4.7.2",
+    "cypress-axe-core": "^2.0.0"
   }
 }
