@@ -5,19 +5,17 @@
 // https://douglasfugazi.co
 
 Cypress._.times(5, () => {
-    describe('Visit Homepage - Democart', () => {
-        it('Verify Desktop menu multiple times', () => {
-            cy.visit('https://demo.opencart.com')
-            cy.get('.nav > :nth-child(1) > .dropdown-toggle')
-            .should('be.visible')
-            .click()
+  describe("Visit Homepage - Democart", () => {
+    it("Verify Desktop menu multiple times", () => {
+      cy.visit("https://demo.opencart.com");
+      cy.get(".nav > :nth-child(1) > .dropdown-toggle")
+        .should("be.visible")
+        .click();
 
-            cy.get('.open > .dropdown-menu > .see-all')
-            .should('be.visible')
-            .click()
-        });
+      cy.get(".open > .dropdown-menu > .see-all").should("be.visible").click();
     });
-})
+  });
+});
 
 // This method let you run a test multiple times with Cypress to prove it is stable
 // Cypress has several other famous libraries to make life easier for its users, one of these libraries is Lodash
