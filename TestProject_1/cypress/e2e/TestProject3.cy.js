@@ -4,67 +4,52 @@
 // Besides I am testing a Democart hompepage to practicing writing advanced tests in Cypress
 // https://douglasfugazi.co
 
-describe('Check that user was redirected to the correct URL at Democart', () => {
-    it('Visit Homepage - Democart', () => {
-        cy.visit('https://demo.opencart.com')
-        //cy.login('john-doe1@example.com', 'demo')
-    });
+describe("Check that user was redirected to the correct URL at Democart", () => {
+  it("Visit Homepage - Democart", () => {
+    cy.visit("https://demo.opencart.com");
+    //cy.login('john-doe1@example.com', 'demo')
+  });
 
-    it('Verify the Login Page', () => {
-        cy.get(':nth-child(2) > .dropdown > .dropdown-toggle > .d-none')
-        .should('be.visible')
-        .click()
-        cy.get(':nth-child(2) > .dropdown > .dropdown-menu > :nth-child(2) > .dropdown-item')
-        .should('be.visible')
-        .click()
+  it("Verify the Login Page", () => {
+    cy.get(":nth-child(2) > .dropdown > .dropdown-toggle > .d-none")
+      .should("be.visible")
+      .click();
+    cy.get(
+      ":nth-child(2) > .dropdown > .dropdown-menu > :nth-child(2) > .dropdown-item"
+    )
+      .should("be.visible")
+      .click();
 
-        cy.url()
-        .should('contain', 'account/login')
-        
-        cy.get('h2')
-        .should('be.visible')
-        
-        cy.contains('Returning Customer')
-    });
+    cy.url().should("contain", "account/login");
 
-    it('Do Login access to user', () => {
-        cy.get('#input-email')
-        .should('be.visible')
-        .type('john-doe1@example.com')
+    cy.get("h2").should("be.visible");
 
-        cy.get('#input-password')
-        .should('be.visible')
-        .type('demo')
+    cy.contains("Returning Customer");
+  });
 
-        cy.contains('a', 'Forgotten Password')
-        .should('have.attr', 'href')
+  it("Do Login access to user", () => {
+    cy.get("#input-email").should("be.visible").type("john-doe1@example.com");
 
-        cy.get('#form-login > .btn')
-        .should('be.visible')
-        .click()
+    cy.get("#input-password").should("be.visible").type("demo");
 
-        cy.get('#form-login > h2')
-        .should('have.text', 'Returning Customer')
-    });
+    cy.contains("a", "Forgotten Password").should("have.attr", "href");
 
-    it('Do Logout to Account', () => {
-        cy.get('.list-group > a:last')
-        .should('have.text', 'Logout')
-        .click()
+    cy.get("#form-login > .btn").should("be.visible").click();
 
-        cy.url()
-        .should('contain', 'account/logout')
+    cy.get("#form-login > h2").should("have.text", "Returning Customer");
+  });
 
-        cy.get('h1:last')
-        .should('have.text', 'Account Logout')
-        
-        cy.get('.pull-right > .btn')
-        .should('be.visible')
-        .click()
+  it("Do Logout to Account", () => {
+    cy.get(".list-group > a:last").should("have.text", "Logout").click();
 
-        cy.url()
-        .should('contain', 'common/home')
-    });
+    cy.url().should("contain", "account/logout");
+
+    cy.get("h1:last").should("have.text", "Account Logout");
+
+    cy.get(".pull-right > .btn").should("be.visible").click();
+
+    cy.url().should("contain", "common/home");
+  });
 });
 
 // In this test we have learned how to get the current URL of the page that is currently active using cy.url()
