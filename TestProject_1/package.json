@@ -1,0 +1,27 @@
+{
+  "name": "testproject_1",
+  "version": "1.0.0",
+  "description": "Cypress End-to-End Testing",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fugazi/Cypress-Opencart.git"
+  },
+  "keywords": [
+    "cypress",
+    "automation",
+    "testing"
+  ],
+  "author": "Douglas Urrea Ocampo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/fugazi/Cypress-Opencart/issues"
+  },
+  "homepage": "https://github.com/fugazi/Cypress-Opencart#readme",
+  "dependencies": {
+    "cypress": "^12.17.2"
+  }
+}
