@@ -14,23 +14,8 @@
 // ***********************************************************
 
 // Import commands.js using ES2015 syntax:
-import './commands'
-import 'cypress-axe';
-import 'cypress-axe-core'
+import 'cypress-axe-core';
+import './commands';
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
-
-module.exports = (on, config) => {
-  on('task', {
-    log(message) {
-      console.log(message)
-      return null
-    },
-
-    table(message) {
-      console.table(message)
-      return null
-    }
-  })
-}
