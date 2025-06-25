@@ -6,7 +6,7 @@
 
 describe("Visit Homepage - Democart", () => {
   beforeEach(() => {
-    cy.visit("https://demo.opencart.com");
+    cy.visit("/");
   });
 
   it("Validate the principal container at Homepage", () => {

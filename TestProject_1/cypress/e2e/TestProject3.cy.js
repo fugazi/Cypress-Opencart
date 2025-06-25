@@ -5,12 +5,9 @@
 // https://douglasfugazi.co
 
 describe("Check that user was redirected to the correct URL at Democart", () => {
-  it("Visit Homepage - Democart", () => {
-    cy.visit("https://demo.opencart.com");
+  it("should allow a user to login and logout", () => {
+    cy.visit("/");
     //cy.login('john-doe1@example.com', 'demo')
-  });
-
-  it("Verify the Login Page", () => {
     cy.get(":nth-child(2) > .dropdown > .dropdown-toggle > .d-none")
       .should("be.visible")
       .click();
@@ -25,9 +22,6 @@ describe("Check that user was redirected to the correct URL at Democart", () => 
     cy.get("h2").should("be.visible");
 
     cy.contains("Returning Customer");
-  });
-
-  it("Do Login access to user", () => {
     cy.get("#input-email").should("be.visible").type("john-doe1@example.com");
 
     cy.get("#input-password").should("be.visible").type("demo");
@@ -37,9 +31,6 @@ describe("Check that user was redirected to the correct URL at Democart", () => 
     cy.get("#form-login > .btn").should("be.visible").click();
 
     cy.get("#form-login > h2").should("have.text", "Returning Customer");
-  });
-
-  it("Do Logout to Account", () => {
     cy.get(".list-group > a:last").should("have.text", "Logout").click();
 
     cy.url().should("contain", "account/logout");

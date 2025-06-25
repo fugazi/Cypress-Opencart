@@ -5,11 +5,8 @@
 // https://douglasfugazi.co
 
 describe("Create a new Account at Democart", () => {
-  it("Visit Homepage - Democart", () => {
-    cy.visit("https://demo.opencart.com");
-  });
-
-  it("Verify My Account to create a Register", () => {
+  it("should allow a user to register for a new account", () => {
+    cy.visit("/");
     cy.get(":nth-child(2) > .dropdown > .dropdown-toggle > .d-none")
       .should("be.visible")
       .click();
@@ -18,9 +15,6 @@ describe("Create a new Account at Democart", () => {
     )
       .should("be.visible")
       .click();
-  });
-
-  it("Register a new Account with Full Details", () => {
     cy.contains("Register Account").should("be.visible");
 
     cy.get("#input-firstname").should("be.visible").type("Homero");

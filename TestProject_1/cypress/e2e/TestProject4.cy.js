@@ -7,7 +7,7 @@
 Cypress._.times(5, () => {
   describe("Visit Homepage - Democart", () => {
     it("Verify Desktop menu multiple times", () => {
-      cy.visit("https://demo.opencart.com");
+      cy.visit("/");
       cy.get(".nav > :nth-child(1) > .dropdown-toggle")
         .should("be.visible")
         .click();
