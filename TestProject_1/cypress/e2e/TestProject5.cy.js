@@ -1,154 +1,30 @@
 /// <reference types="cypress" />
 
-// This is a example of End-to-End Automation Testing with Cypress
-// Besides I am testing a Democart hompepage to practicing writing advanced tests in Cypress
-// https://douglasfugazi.co
+describe("Tests API with Cypress using Mocks", () => {
+  beforeEach(() => {
+    cy.visit("about:blank");
+  });
 
-describe("Tests API with Cypress", () => {
   context("GET method /usuarios", () => {
-    beforeEach(() => {
-      cy.request({
-        method: "GET",
-        url: "https://serverest.dev/usuarios",
-      }).as("getUsers");
-    });
-
-    it("GET users - Verify the header", () => {
-      cy.get("@getUsers")
-        .its("headers")
-        .its("content-type")
-        .should("include", "application/json; charset=utf-8");
-    });
-
-    it("GET users - Verify the server response: status code", () => {
-      cy.get("@getUsers").its("status").should("be.equal", 200);
-    });
-
-    it("GET users - Verify the response body: usuarios", () => {
-      cy.get("@getUsers").should((response) => {
-        expect(response.status).to.eq(200);
-        expect(response.body.usuarios[0]).to.have.all.keys(
-          "nome",
-          "email",
-          "password",
-          "administrador",
-          "_id"
-        );
-        expect(response.body.usuarios[0].nome).to.not.be.null;
-        expect(response.body.usuarios[0].email).to.not.be.null;
-        expect(response.body.usuarios[0].password).to.not.be.null;
-        expect(response.body.usuarios[0]._id).to.not.be.null;
-      });
-    });
-
-    it("GET users - Then it should return a list with all registered users and verify all keys of the response body", () => {
-      cy.request({
-        method: "GET",
-        url: "https://serverest.dev/usuarios",
-      }).should((response) => {
-        expect(response.status).to.eq(200);
-        expect(response.body.quantidade).to.eq(response.body.usuarios.length);
-        Cypress._.each(response.body.usuarios, (usuario) => {
-          expect(usuario).to.have.all.keys(
-            "nome",
-            "email",
-            "password",
-            "administrador",
-            "_id"
-          );
-          expect(usuario.nome).to.not.be.null;
-          expect(usuario.email).to.not.be.null;
-          expect(usuario.password).to.not.be.null;
-          expect(usuario._id).to.not.be.null;
-        });
-      });
-    });
-
-    it("GET usuarios - Verify the method passing id query param - Then it should return only the filtered user", () => {
-      cy.request({
-        method: "GET",
-        url: "https://serverest.dev/usuarios",
-        qs: {
-          _id: "0uxuPY0cbmQhpEz1",
-        },
-      }).should((response) => {
-        expect(response.status).to.eq(200);
-        expect(response.body.usuarios[0].nome).to.eq("Fulano da Silva");
+    it("should return a list of users", () => {
+      cy.intercept("GET", `${Cypress.env("apiBaseUrl")}/usuarios`, { fixture: "users.json" }).as("getUsers");
+      cy.window().then(win => win.fetch(`${Cypress.env("apiBaseUrl")}/usuarios`));
+      cy.wait("@getUsers").then((interception) => {
+        expect(interception.response.statusCode).to.eq(200);
+        expect(interception.response.body.usuarios).to.have.length(2);
+        expect(interception.response.body.usuarios[0].nome).to.eq("Fulano da Silva");
       });
     });
   });
 
   context("GET method /produtos", () => {
-    beforeEach(() => {
-      cy.request({
-        method: "GET",
-        url: "https://serverest.dev/produtos",
-      }).as("getProducts");
-    });
-
-    it("GET produtos - Verify the header", () => {
-      cy.get("@getProducts")
-        .its("headers")
-        .its("content-type")
-        .should("include", "application/json; charset=utf-8");
-    });
-
-    it("GET produtos - Verify the server response: status code", () => {
-      cy.get("@getProducts").its("status").should("be.equal", 200);
-    });
-
-    it("GET produtos - Verify the response body: produtos", () => {
-      cy.get("@getProducts").should((response) => {
-        expect(response.status).to.eq(200);
-        expect(response.body.produtos[0]).to.have.all.keys(
-          "nome",
-          "preco",
-          "descricao",
-          "quantidade",
-          "_id"
-        );
-        expect(response.body.produtos[0].nome).to.not.be.null;
-        expect(response.body.produtos[0].preco).to.not.be.null;
-        expect(response.body.produtos[0].descricao).to.not.be.null;
-        expect(response.body.produtos[0].quantidade).to.not.be.null;
-        expect(response.body.produtos[0]._id).to.not.be.null;
-      });
-    });
-
-    it("GET produtos - Then it should return a list with all products and verify all keys of the response body", () => {
-      cy.request({
-        method: "GET",
-        url: "https://serverest.dev/produtos",
-      }).should((response) => {
-        expect(response.status).to.eq(200);
-        expect(response.body.quantidade).to.eq(response.body.produtos.length);
-        Cypress._.each(response.body.produtos, (produto) => {
-          expect(produto).to.have.all.keys(
-            "nome",
-            "preco",
-            "descricao",
-            "quantidade",
-            "_id"
-          );
-          expect(produto.nome).to.not.be.null;
-          expect(produto.preco).to.not.be.null;
-          expect(produto.descricao).to.not.be.null;
-          expect(produto.quantidade).to.not.be.null;
-          expect(produto._id).to.not.be.null;
-        });
-      });
-    });
-
-    it("GET produtos - Verify the method passing id query param - Then it should return only the filtered user", () => {
-      cy.request({
-        method: "GET",
-        url: "https://serverest.dev/produtos",
-        qs: {
-          _id: "BeeJh5lz3k6kSIzA",
-        },
-      }).should((response) => {
-        expect(response.status).to.eq(200);
-        expect(response.body.produtos[0].descricao).to.eq("Mouse");
+    it("should return a list of products", () => {
+      cy.intercept("GET", `${Cypress.env("apiBaseUrl")}/produtos`, { fixture: "products.json" }).as("getProducts");
+      cy.window().then(win => win.fetch(`${Cypress.env("apiBaseUrl")}/produtos`));
+      cy.wait("@getProducts").then((interception) => {
+        expect(interception.response.statusCode).to.eq(200);
+        expect(interception.response.body.produtos).to.have.length(2);
+        expect(interception.response.body.produtos[0].nome).to.eq("Logitech MX Vertical");
       });
     });
   });

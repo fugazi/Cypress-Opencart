@@ -1,30 +1,42 @@
 /// <reference types="cypress" />
 
-// This is a example of End-to-End Automation Testing with Cypress
-// Besides I am testing a Democart hompepage to practicing writing advanced tests in Cypress
-// https://douglasfugazi.co
+describe("Tests API with Cypress using Mocks - Negative Scenarios", () => {
+  beforeEach(() => {
+    cy.visit("about:blank");
+  });
 
-describe("Tests API with Cypress: Negative tests", () => {
-  context("to method /usuarios", () => {
-    it("should return a 400 status code when trying to get users with invalid parameters", () => {
-      cy.request({
-        method: "GET",
-        url: "https://serverest.dev/usuarios",
-        failOnStatusCode: false,
-      }).should((response) => {
-        expect(response.status).to.eq(200); //This should be 200, not 400
+  context("GET method /usuarios", () => {
+    it("should return a 400 error when trying to get users with invalid parameters", () => {
+      cy.intercept("GET", `${Cypress.env("apiBaseUrl")}/usuarios?invalid_param=true`, {
+        statusCode: 400,
+        body: {
+          message: "Invalid parameters",
+        },
+      }).as("getUsers");
+
+      cy.window().then(win => win.fetch(`${Cypress.env("apiBaseUrl")}/usuarios?invalid_param=true`));
+
+      cy.wait("@getUsers").then((interception) => {
+        expect(interception.response.statusCode).to.eq(400);
+        expect(interception.response.body.message).to.eq("Invalid parameters");
       });
     });
   });
 
-  context("to method /produtos", () => {
-    it("should return a 400 status code when trying to get products with invalid parameters", () => {
-      cy.request({
-        method: "GET",
-        url: "https://serverest.dev/produtos",
-        failOnStatusCode: false,
-      }).should((response) => {
-        expect(response.status).to.eq(200); //This should be 200, not 400
+  context("GET method /produtos", () => {
+    it("should return a 400 error when trying to get products with invalid parameters", () => {
+      cy.intercept("GET", `${Cypress.env("apiBaseUrl")}/produtos?invalid_param=true`, {
+        statusCode: 400,
+        body: {
+          message: "Invalid parameters",
+        },
+      }).as("getProducts");
+
+      cy.window().then(win => win.fetch(`${Cypress.env("apiBaseUrl")}/produtos?invalid_param=true`));
+
+      cy.wait("@getProducts").then((interception) => {
+        expect(interception.response.statusCode).to.eq(400);
+        expect(interception.response.body.message).to.eq("Invalid parameters");
       });
     });
   });

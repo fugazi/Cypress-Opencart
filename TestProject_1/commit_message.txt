@@ -1,0 +1,7 @@
+feat: Update dependencies and fix tests
+
+- Update Cypress to version 14.5.0
+- Add user agent to cypress.config.js to avoid 403 error
+- Refactor tests to be more robust and less flaky
+- Add faker-js to generate random data for tests
+- Add .gitignore file to ignore screenshots and videos

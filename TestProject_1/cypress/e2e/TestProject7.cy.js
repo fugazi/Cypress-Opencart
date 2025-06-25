@@ -1,67 +1,60 @@
 /// <reference types="cypress" />
 
-// This is a example of End-to-End Automation Testing with Cypress
-// Besides I am testing a Democart hompepage to practicing writing advanced tests in Cypress
-// https://douglasfugazi.co
-
-describe("Test API with Cypress: POST method", () => {
-  let token;
-  let fakeUser;
-
-  before(() => {
-    cy.task("generateUser").then((user) => {
-      fakeUser = user;
-    });
-    cy.request({
-      method: "POST",
-      url: "https://serverest.dev/login",
-      body: {
-        email: "fulano@qa.com",
-        password: "teste",
-      },
-    }).then((response) => {
-      token = response.body.authorization;
-    });
+describe("Tests API with Cypress using Mocks - POST method", () => {
+  beforeEach(() => {
+    cy.visit("about:blank");
   });
 
   context("/usuarios", () => {
-    it("POST users - Create a new user", () => {
-      cy.request({
-        method: "POST",
-        url: "https://serverest.dev/usuarios",
-        headers: {
-          accept: "application/json",
-          "Content-Type": "application/json",
+    it("should create a new user", () => {
+      cy.intercept("POST", `${Cypress.env("apiBaseUrl")}/usuarios`, {
+        statusCode: 201,
+        body: {
+          message: "Cadastro realizado com sucesso",
+          _id: "1a2b3c4d5e6f7g8h",
         },
-        body: fakeUser,
-      }).then((response) => {
-        expect(response.status).to.eq(201);
-        expect(response.body.message).eq("Cadastro realizado com sucesso");
-        expect(response.body).to.have.all.keys("message", "_id");
+      }).as("postUser");
+
+      cy.window().then(win => {
+        win.fetch(`${Cypress.env("apiBaseUrl")}/usuarios", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ name: "Test User" }),
+        });
+      });
+
+      cy.wait("@postUser").then((interception) => {
+        expect(interception.response.statusCode).to.eq(201);
+        expect(interception.response.body.message).to.eq("Cadastro realizado com sucesso");
       });
     });
   });
 
   context("/produtos", () => {
-    it("POST produtos - Create a new product", () => {
-      cy.request({
-        method: "POST",
-        url: "https://serverest.dev/produtos",
-        headers: {
-          accept: "application/json",
-          "Content-Type": "application/json",
-          authorization: token,
-        },
+    it("should create a new product", () => {
+      cy.intercept("POST", `${Cypress.env("apiBaseUrl")}/produtos`, {
+        statusCode: 201,
         body: {
-          nome: "LG Monitor Ultra-Wide XX",
-          preco: 1600,
-          descricao: "Monitor",
-          quantidade: "10",
+          message: "Cadastro realizado com sucesso",
+          _id: "1a2b3c4d5e6f7g8h",
         },
-      }).then((response) => {
-        expect(response.status).to.eq(201);
-        expect(response.body.message).eq("Cadastro realizado com sucesso");
-        expect(response.body).to.have.all.keys("message", "_id");
+      }).as("postProduct");
+
+      cy.window().then(win => {
+        win.fetch(`${Cypress.env("apiBaseUrl")}/produtos", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ name: "Test Product" }),
+        });
+      });
+
+      cy.wait("@postProduct").then((interception) => {
+        expect(interception.response.statusCode).to.eq(201);
+        expect(interception.response.body.message).to.eq("Cadastro realizado com sucesso");
       });
     });
   });

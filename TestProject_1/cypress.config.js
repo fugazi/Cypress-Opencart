@@ -7,7 +7,7 @@ module.exports = defineConfig({
       on('task', {
         generateUser() {
           return {
-            nome: faker.name.fullName(),
+            nome: faker.person.fullName(),
             email: faker.internet.email(),
             password: faker.internet.password(),
             administrador: 'true',
@@ -20,4 +20,7 @@ module.exports = defineConfig({
     defaultCommandTimeout: 10000,
     chromeWebSecurity: false
   },
+  env: {
+    apiBaseUrl: 'https://serverest.dev'
+  }
 });
