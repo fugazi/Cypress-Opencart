@@ -22,9 +22,9 @@
   },
   "homepage": "https://github.com/fugazi/Cypress-Opencart#readme",
   "devDependencies": {
-    "@faker-js/faker": "^9.8.0",
+    "@faker-js/faker": "^9.9.0",
     "axe-core": "^4.10.3",
-    "cypress": "^14.5.0",
+    "cypress": "^14.5.1",
     "cypress-axe-core": "^2.0.0"
   }
 }
