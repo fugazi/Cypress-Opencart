@@ -1,0 +1,20 @@
+{
+  "items": [
+    {
+      "productId": 1,
+      "quantity": 1,
+      "expectedSubtotal": 599
+    },
+    {
+      "productId": 2,
+      "quantity": 2,
+      "expectedSubtotal": 238
+    },
+    {
+      "productId": 3,
+      "quantity": 3,
+      "expectedSubtotal": 1197
+    }
+  ],
+  "freeShippingThreshold": 500
+}

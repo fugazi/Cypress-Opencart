@@ -1,0 +1,55 @@
+{
+  "name": "cypress-music-tech-shop",
+  "version": "2.0.0",
+  "description": "Cypress E2E test suite for the Music-Tech Shop application",
+  "license": "MIT",
+  "author": "Douglas Urrea Ocampo",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fugazi/Cypress-Opencart.git"
+  },
+  "keywords": [
+    "cypress",
+    "e2e",
+    "automation",
+    "testing",
+    "music-tech-shop",
+    "typescript"
+  ],
+  "bugs": {
+    "url": "https://github.com/fugazi/Cypress-Opencart/issues"
+  },
+  "homepage": "https://github.com/fugazi/Cypress-Opencart#readme",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "cy:open": "cypress open",
+    "cy:run": "cypress run",
+    "cy:run:chrome": "cypress run --browser chrome",
+    "cy:run:firefox": "cypress run --browser firefox",
+    "cy:run:edge": "cypress run --browser edge",
+    "lint": "eslint cypress --ext .ts",
+    "lint:fix": "eslint cypress --ext .ts --fix",
+    "format": "prettier --write \"cypress/**/*.ts\" \"*.{ts,json,md}\"",
+    "format:check": "prettier --check \"cypress/**/*.ts\" \"*.{ts,json,md}\"",
+    "report:clean": "rimraf cypress/report cypress/results"
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^10.5.0",
+    "@types/node": "^22.0.0",
+    "@typescript-eslint/eslint-plugin": "^8.0.0",
+    "@typescript-eslint/parser": "^8.0.0",
+    "axe-core": "^4.12.1",
+    "cypress": "^15.18.0",
+    "cypress-axe-core": "^2.0.0",
+    "cypress-mochawesome-reporter": "^3.8.4",
+    "eslint": "^9.0.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-cypress": "^3.5.0",
+    "prettier": "^3.3.0",
+    "rimraf": "^6.0.1",
+    "typescript": "^5.5.0",
+    "typescript-eslint": "^8.62.1"
+  }
+}

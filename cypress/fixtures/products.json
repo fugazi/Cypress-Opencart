@@ -1,0 +1,27 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "slug": "1",
+      "name": "Arturia MicroFreak",
+      "category": "Electronics",
+      "price": 599
+    },
+    {
+      "id": 2,
+      "slug": "2",
+      "name": "Focusrite Scarlett Solo",
+      "category": "Accessories",
+      "price": 119
+    },
+    {
+      "id": 3,
+      "slug": "3",
+      "name": "Behringer RD-8",
+      "category": "Electronics",
+      "price": 399
+    }
+  ],
+  "categories": ["Electronics", "Accessories", "Photography"],
+  "sortOptions": ["price-asc", "price-desc", "name-asc", "name-desc", "newest"]
+}
