@@ -47,17 +47,17 @@ export class ProductDetailPage extends BasePage {
   getGalleryMainImage(): Cypress.Chainable<JQuery<HTMLElement>> {
     return this.getByTestId('gallery-main-image')
   }
-  getGalleryThumbnails(): Cypress.Chainable<JQuery<HTMLElement>> {
-    return this.getByTestId('gallery-thumbnails')
-  }
   getShareFacebook(): Cypress.Chainable<JQuery<HTMLElement>> {
     return this.getByTestId('share-facebook-button')
   }
   getShareTwitter(): Cypress.Chainable<JQuery<HTMLElement>> {
     return this.getByTestId('share-twitter-button')
   }
-  getShareLink(): Cypress.Chainable<JQuery<HTMLElement>> {
-    return this.getByTestId('share-link-button')
+  getShareLinkedIn(): Cypress.Chainable<JQuery<HTMLElement>> {
+    return this.getByTestId('share-linkedin-button')
+  }
+  getCopyLink(): Cypress.Chainable<JQuery<HTMLElement>> {
+    return this.getByTestId('copy-link-button')
   }
   getFeaturedProducts(): Cypress.Chainable<JQuery<HTMLElement>> {
     return this.getByTestId('featured-products-section')

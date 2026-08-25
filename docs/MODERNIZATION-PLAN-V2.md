@@ -177,6 +177,86 @@ aquí se ordenan **por dependencia técnica**:
 existentes) antes de pasar al siguiente. La suite completa debe quedar en verde
 al final de la fase.
 
+### Ejecución Fase 2 — CHECKPOINT (25/08/2026, trabajo en progreso)
+
+#### Hallazgos de la investigación en runtime (artefactos en `docs/research/`)
+
+1. **No existe backend HTTP real.** Interceptando TODO el tráfico mientras se
+   conduce el harness `/api-test`, jamás sale una llamada `/api/*` del browser —
+   solo navegación RSC de Next.js (`?_rsc=`). El harness **simula** la API
+   client-side y pinta cada respuesta JSON simulada en `response-output`.
+   → `api-contract.cy.ts` se reorientó a assertar el contrato simulado que el
+   harness renderiza (que es la "superficie de API" real de la app).
+2. **Los filtros de `/products` no son `<select>` nativos**: son comboboxes de
+   shadcn/ui (BUTTON `role=combobox` + opciones en portal). Por eso fallaban
+   los `.select()`. Selección real: click al trigger + click a
+   `[role="option"]`. Categorías reales: All, Electronics, Photography,
+   Accessories, Synthesizers, Studio Recording. Sort real: "Name (A-Z)",
+   "Name (Z-A)", "Price (Low to High)", "Price (High to Low)".
+3. **Contrato del carrito**: items `cart-item-${id}` con controles de cantidad
+   por item (`cart-increase/decrease-quantity-${id}`), totals
+   `cart-subtotal/shipping/tax/total`, `free-shipping-threshold` (sin
+   `-label`), y `checkout-button` solo existe con items. El estado vacío
+   muestra `empty-cart`. Todo el estado del carrito es client-side.
+4. **Checkout**: "Complete Purchase" NO muestra toast — vacía el carrito y
+   navega al home. El contrato observable de éxito = salida de `/cart` +
+   `empty-cart` al volver.
+5. **Product detail**: `gallery-thumbnails` no existe (solo imagen principal);
+   el botón de compartir enlace es `copy-link-button` (no `share-link-button`).
+   Specs/share/reviews/featured sí existen en todos los productos.
+6. **Admin**: headings reales = `Admin Dashboard` (h1), `Key Metrics`,
+   `Order Status`, `Analytics`. `Revenue Overview`, `Sales by Category`,
+   `Top Selling Products`, `Recent Activity` son labels de sección, no
+   headings → `assertSection` ahora matchea cualquier elemento.
+7. Bug del harness documentado: `products-get-all` renderiza
+   `{ "error": "Cannot read properties of undefined (reading 'stringify')" }`.
+
+#### Estado por paso
+
+| Paso | Estado | Resultado de tests |
+| --- | --- | --- |
+| 1 — Contrato harness → `api-contract` | ✅ Reescrito y en verde | **7/7** |
+| 2 — `clearCart()` sin `cy.wait`/`force`/recursión manual | ✅ Reescrito (loop con aserciones) | — |
+| 3a — `checkout` | ✅ Reescrito y en verde | **2/2** |
+| 3b — `cart` | ⚠️ Reescrito (5 tests), **0/5 — diagnóstico pendiente** | 0/5 |
+| 4 — `products-catalog` | ⚠️ Reescrito (7 tests, dropdowns custom + fixture real) | **5/7** |
+| 5 — `product-detail` | ⚠️ Reescrito (8 tests, selectores corregidos) | **6/8** |
+| 6 — `admin` | ✅ Reescrito y en verde | **7/7** |
+| 7 — `accessibility` (a11y) | ⏳ Sin empezar | — |
+
+Avance neto: **de 33/71 habilitados → 60 habilitados; 51 en verde** en la
+última corrida parcial (api-contract 7 + checkout 2 + admin 7 + catalog 5 +
+detail 6 + los 31 previos que seguían en verde menos cart que pasó de 1 a 0
+temporalmente).
+
+#### Pendiente para retomar
+
+1. **Diagnosticar `cart.cy.ts` (0/5)**: todos fallan con
+   `cy.click() failed because the page updated while this command was
+   executing` — incluso el primer test (que apenas usa `loginAsCustomer` en el
+   `beforeEach`). Sospecha: race de hidratación en el click de
+   `login-submit-button` dentro de `cy.session()` (checkout pasó con el mismo
+   comando, así que es timing/flaky, no lógica). Líneas a atacar:
+   `loginViaUI` en `cypress/support/commands.ts` (blindar el click del submit,
+   p. ej. aserción de visibilidad + reintento) y/o el click de
+   add-to-cart en `addProductToCart`.
+2. **Diagnosticar los 2 fallos de `products-catalog`** (5/7) — identificar
+   cuáles tests fallan (correr el spec solo y leer el error).
+3. **Diagnosticar los 2 fallos de `product-detail`** (6/8) — ídem.
+4. **Paso 7 a11y**: escribir research de violaciones con `checkA11y` +
+   `skipFailures`/`violationsCb` (la API v2 de `cypress-axe-core` lo permite),
+   tunear `exclude` + `shouldFailFn` por severidad (critical/serious), y
+   corregir el helper `runA11yCheck` a la firma real
+   `cy.checkA11y(context, options)` (la firma actual con objeto único cast
+   `as never` nunca se validó porque el spec estuvo skipeado).
+5. Suite completa en verde → actualizar contadores del README → lint/tsc →
+   commit final de la fase.
+
+> Los specs de investigación temporales (`_research-*.cy.ts`) se movieron a
+> `docs/research/` (fuera del `specPattern`) junto con los JSON de hallazgos
+> (`research-*.json`). No se ejecutan con la suite; se conservan como
+> referencia y se pueden borrar al cerrar la fase.
+
 ---
 
 ### Fase 3 — Actualizaciones mayores de dependencias

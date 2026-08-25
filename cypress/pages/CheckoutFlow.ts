@@ -4,24 +4,27 @@ import { BasePage } from './BasePage'
  * Checkout flow.
  *
  * The Music-Tech Shop app has NO dedicated /checkout route. The "Complete
- * Purchase" button on /cart triggers a client-side flow that shows a
- * "Purchase Complete" toast. This object encapsulates asserting that toast.
+ * Purchase" button on /cart triggers a client-side flow: the cart is emptied
+ * and the app navigates back to the storefront. There is no success toast —
+ * the observable contract is the navigation + the empty cart.
  */
 export class CheckoutFlow extends BasePage {
   // There is no dedicated page, so we stay on /cart.
   protected readonly path = '/cart'
 
-  /** Assert the success toast appears after Complete Purchase. */
-  assertPurchaseCompleteToast(): Cypress.Chainable<any> {
-    return cy.contains(/purchase complete/i).should('be.visible')
+  /** Trigger checkout from /cart. */
+  completePurchase(): Cypress.Chainable<JQuery<HTMLElement>> {
+    return cy.getByTestId('checkout-button').should('be.visible').click()
   }
 
-  /** Trigger checkout from /cart and assert the success toast. */
-  completePurchase(): Cypress.Chainable<any> {
-    return cy
-      .getByTestId('checkout-button')
-      .click()
-      .then(() => this.assertPurchaseCompleteToast())
+  /**
+   * Assert the observable success contract: the app leaves /cart and the
+   * cart is empty afterwards.
+   */
+  assertPurchaseCompleted(): Cypress.Chainable<JQuery<HTMLElement>> {
+    cy.url().should('not.include', '/cart')
+    cy.visit('/cart')
+    return cy.getByTestId('empty-cart').should('be.visible')
   }
 
   waitForPage(): Cypress.Chainable<any> {

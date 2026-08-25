@@ -64,12 +64,20 @@ export class ProductsPage extends BasePage {
     return this.getSearchInput().clear().type(`${term}{enter}`)
   }
 
-  filterByCategory(category: string): Cypress.Chainable<JQuery<HTMLElement>> {
-    return this.getCategoryFilter().select(category)
+  /**
+   * The filters are shadcn/ui comboboxes, not native <select>: click the
+   * trigger, then the portal-rendered option by its text.
+   */
+  selectCategory(option: string): Cypress.Chainable<any> {
+    return this.getByTestId('category-filter')
+      .click()
+      .then(() => cy.get('[role="option"]').contains(option).click())
   }
 
-  sortBy(option: string): Cypress.Chainable<JQuery<HTMLElement>> {
-    return this.getSortFilter().select(option)
+  selectSort(option: string): Cypress.Chainable<any> {
+    return this.getByTestId('sort-filter')
+      .click()
+      .then(() => cy.get('[role="option"]').contains(option).click())
   }
 
   addToCart(productId: string | number): Cypress.Chainable<JQuery<HTMLElement>> {

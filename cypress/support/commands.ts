@@ -112,7 +112,9 @@ Cypress.Commands.add('logout', () => {
 Cypress.Commands.add('addProductToCart', (productId, qty = 1) => {
   if (qty === 1) {
     cy.visit('/products')
-    cy.getByTestId(`product-add-to-cart-button-${productId}`).click()
+    // Visibility assertion first: the app hydrates client-side and can remount
+    // the grid right after the visit.
+    cy.getByTestId(`product-add-to-cart-button-${productId}`).should('be.visible').click()
     return
   }
   cy.visit(`/products/${productId}`)
@@ -125,32 +127,28 @@ Cypress.Commands.add('addProductToCart', (productId, qty = 1) => {
         cy.getByTestId('quantity-increase-button').click()
       }
     })
-  cy.getByTestId('add-to-cart-button').click()
+  cy.getByTestId('add-to-cart-button').should('be.visible').click()
 })
 
 /**
  * Remove every item from the cart until the empty state is shown.
+ *
+ * The cart is client-side state: each removal is confirmed by asserting the
+ * item row disappears before the next one is clicked — no fixed waits needed.
  */
 Cypress.Commands.add('clearCart', () => {
   cy.visit('/cart')
-  cy.get('body').then(($body) => {
-    if ($body.find('[data-testid^="cart-remove-item-"]').length === 0) {
-      return
-    }
-    const removeAll = (): void => {
-      cy.get('body').then(($b) => {
-        const removeBtns = $b.find('[data-testid^="cart-remove-item-"]')
-        if (removeBtns.length === 0) {
-          return
-        }
-        cy.wrap(removeBtns[0]).click({ force: true })
-        // eslint-disable-next-line cypress/no-unnecessary-waiting
-        cy.wait(200)
-        removeAll()
-      })
-    }
-    removeAll()
-  })
+  const removeAll = (): void => {
+    cy.get('body').then(($body) => {
+      const $btn = $body.find('[data-testid^="cart-remove-item-"]').first()
+      if ($btn.length === 0) return
+      const id = ($btn.attr('data-testid') ?? '').replace('cart-remove-item-', '')
+      cy.getByTestId(`cart-remove-item-${id}`).first().click()
+      cy.getByTestId(`cart-item-${id}`).should('not.exist')
+      removeAll()
+    })
+  }
+  removeAll()
 })
 
 /**

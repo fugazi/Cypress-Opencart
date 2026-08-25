@@ -70,6 +70,24 @@ export class ApiTestPage extends BasePage {
     return this.getByTestId('order-get-button')
   }
 
+  getUtilityResetButton(): Cypress.Chainable<JQuery<HTMLElement>> {
+    return this.getByTestId('utility-reset-button')
+  }
+
+  /**
+   * Click a button inside a collapsible harness section. The auth and products
+   * sections render open by default; utility/cart/orders start collapsed, so
+   * the toggle is clicked only when the target button is absent from the DOM.
+   */
+  clickSectionButton(toggle: string, button: string): Cypress.Chainable<any> {
+    return cy.get('body').then(($body) => {
+      if ($body.find(`[data-testid="${button}"]`).length === 0) {
+        cy.getByTestId(toggle).first().click()
+      }
+      return cy.getByTestId(button).first().click()
+    })
+  }
+
   getResponseOutput(): Cypress.Chainable<JQuery<HTMLElement>> {
     return this.getByTestId('response-output')
   }

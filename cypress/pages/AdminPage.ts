@@ -9,9 +9,14 @@ import { BasePage } from './BasePage'
 export class AdminPage extends BasePage {
   protected readonly path = '/admin'
 
-  /** Assert a section heading is visible. */
+  /**
+   * Assert a section heading/label is visible. Most admin labels ("Revenue
+   * Overview", "Top Selling Products", …) are not real heading elements —
+   * only "Admin Dashboard" (h1), "Key Metrics", "Order Status" and
+   * "Analytics" are — so this matches any element.
+   */
   assertSection(heading: string): Cypress.Chainable<any> {
-    return cy.contains('h1, h2, h3', heading).should('be.visible')
+    return cy.contains(heading).should('be.visible')
   }
 
   /** Assert a metric card label is visible. */

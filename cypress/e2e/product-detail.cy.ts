@@ -4,15 +4,12 @@ import { productsPage } from '@pages/ProductsPage'
 /**
  * Product detail page ("/products/[slug]").
  *
- * ⚠️ SKIPPED (pending investigation): several assertions depend on testids
- * that are only present on some product pages (gallery-thumbnails,
- * specifications-list, featured-products-section) and on the dynamic product
- * id resolution, which behaves inconsistently across the demo catalog.
- * Re-enable once the product detail DOM contract is confirmed against the
- * live app.
- * See docs/MODERNIZATION-PLAN.md § "Tests en skip (pendientes)".
+ * Fase 2 runtime discovery: every product renders the full page (specs,
+ * share, reviews, featured). The gallery has a main image but NO thumbnails
+ * element, and the share row exposes a "copy link" button instead of a
+ * "share link" one.
  */
-describe.skip('Product detail page', () => {
+describe('Product detail page', () => {
   let productId: string
 
   beforeEach(() => {
@@ -29,10 +26,10 @@ describe.skip('Product detail page', () => {
     productDetailPage.getDescription().should('be.visible')
   })
 
-  it.skip('renders the image gallery with thumbnails (pending DOM contract)', () => {
+  it('renders the image gallery with the main image', () => {
     productDetailPage.visitProduct(productId)
+    productDetailPage.assertVisible('product-image-gallery')
     productDetailPage.getGalleryMainImage().should('be.visible')
-    productDetailPage.getGalleryThumbnails().should('exist')
   })
 
   it('increases and decreases the quantity', () => {
@@ -62,19 +59,20 @@ describe.skip('Product detail page', () => {
     cy.getByTestId('cart-badge').should('exist')
   })
 
-  it.skip('displays the specifications section (pending DOM contract)', () => {
+  it('displays the specifications section', () => {
     productDetailPage.visitProduct(productId)
     productDetailPage.getSpecifications().should('exist')
   })
 
-  it.skip('displays social share buttons (pending DOM contract)', () => {
+  it('displays social share buttons', () => {
     productDetailPage.visitProduct(productId)
     productDetailPage.getShareFacebook().should('exist')
     productDetailPage.getShareTwitter().should('exist')
-    productDetailPage.getShareLink().should('exist')
+    productDetailPage.getShareLinkedIn().should('exist')
+    productDetailPage.getCopyLink().should('exist')
   })
 
-  it.skip('renders the featured products section (pending DOM contract)', () => {
+  it('renders the featured products section', () => {
     productDetailPage.visitProduct(productId)
     productDetailPage.getFeaturedProducts().should('exist')
   })

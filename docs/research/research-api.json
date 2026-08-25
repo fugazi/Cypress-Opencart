@@ -1,0 +1,193 @@
+{
+  "harnessResponses": {
+    "utility-reset-button": "{\n  \"success\": true,\n  \"data\": {\n    \"resetAt\": \"2026-08-25T20:31:41.651Z\",\n    \"clearedData\": [\n      \"carts\",\n      \"orders\",\n      \"sessions\"\n    ]\n  },\n  \"message\": \"All data reset successfully\"\n}",
+    "utility-reset-button__title": "API Response",
+    "auth-login-button": "{\n  \"success\": true,\n  \"data\": {\n    \"user\": {\n      \"id\": \"2\",\n      \"email\": \"user@test.com\",\n      \"name\": \"Test User\",\n      \"role\": \"customer\"\n    },\n    \"token\": \"mock_jwt_2_1787689903873_zieqz5vui\"\n  },\n  \"message\": \"Login successful\"\n}",
+    "auth-login-button__title": "API Response",
+    "auth-get-user-button": "{\n  \"success\": true,\n  \"data\": {\n    \"id\": \"2\",\n    \"email\": \"user@test.com\",\n    \"name\": \"Test User\",\n    \"role\": \"customer\"\n  },\n  \"message\": \"User found\"\n}",
+    "auth-get-user-button__title": "API Response",
+    "products-get-all-button": "{\n  \"error\": \"Cannot read properties of undefined (reading 'stringify')\"\n}",
+    "products-get-all-button__title": "API Response",
+    "products-get-single-button": "{\n  \"success\": true,\n  \"data\": {\n    \"id\": \"1\",\n    \"name\": \"Premium Wireless Headphones\",\n    \"price\": 299.99,\n    \"description\": \"Headphones with active noise cancellation and high-fidelity sound. 30-hour battery life.\",\n    \"category\": \"Electronics\",\n    \"stock\": 45,\n    \"badges\": [\n      \"Best Seller\",\n      \"Free Shipping\"\n    ]\n  },\n  \"message\": \"Product found\"\n}",
+    "products-get-single-button__title": "API Response",
+    "cart-add-button": "{\n  \"success\": true,\n  \"data\": {\n    \"cartId\": \"cart_user@test.com\",\n    \"item\": {\n      \"productId\": \"1\",\n      \"name\": \"Premium Wireless Headphones\",\n      \"price\": 299.99,\n      \"quantity\": 1,\n      \"subtotal\": 299.99\n    }\n  },\n  \"message\": \"Item added to cart\"\n}",
+    "cart-add-button__title": "API Response",
+    "cart-get-button": "{\n  \"success\": true,\n  \"data\": {\n    \"cartId\": \"cart_user@test.com\",\n    \"items\": [\n      {\n        \"productId\": \"1\",\n        \"name\": \"Product 1\",\n        \"price\": 99.99,\n        \"quantity\": 1,\n        \"subtotal\": 99.99\n      }\n    ],\n    \"total\": 99.99\n  },\n  \"message\": \"Cart retrieved successfully\"\n}",
+    "cart-get-button__title": "API Response",
+    "cart-update-button": "{\n  \"success\": true,\n  \"data\": {\n    \"cartId\": \"cart_user@test.com\",\n    \"itemUpdated\": {\n      \"productId\": \"1\",\n      \"quantity\": 2\n    }\n  },\n  \"message\": \"Cart updated successfully\"\n}",
+    "cart-update-button__title": "API Response",
+    "order-create-button": "{\n  \"success\": true,\n  \"data\": {\n    \"orderId\": \"ORD-1787689916926\",\n    \"status\": \"pending\",\n    \"customer\": \"user@test.com\",\n    \"items\": [\n      {\n        \"productId\": \"1\",\n        \"quantity\": 1\n      }\n    ],\n    \"total\": 99.99,\n    \"createdAt\": \"2026-08-25T20:31:56.926Z\"\n  },\n  \"message\": \"Order created successfully\"\n}",
+    "order-create-button__title": "API Response",
+    "order-get-button": "{\n  \"success\": true,\n  \"data\": {\n    \"orders\": [\n      {\n        \"orderId\": \"ORD-1702543200238\",\n        \"status\": \"shipped\",\n        \"total\": 299.99,\n        \"createdAt\": \"2024-01-15T10:00:00Z\"\n      },\n      {\n        \"orderId\": \"ORD-1702456800238\",\n        \"status\": \"delivered\",\n        \"total\": 149.99,\n        \"createdAt\": \"2024-01-14T09:30:00Z\"\n      }\n    ]\n  },\n  \"message\": \"Orders retrieved successfully\"\n}",
+    "order-get-button__title": "API Response",
+    "cart-remove-button": "{\n  \"success\": true,\n  \"data\": {\n    \"cartId\": \"cart_user@test.com\",\n    \"removedProductId\": \"1\"\n  },\n  \"message\": \"Item removed from cart\"\n}",
+    "cart-remove-button__title": "API Response",
+    "cart-clear-button": "{\n  \"success\": true,\n  \"data\": {\n    \"cartId\": \"cart_user@test.com\",\n    \"clearedAt\": \"2026-08-25T20:32:03.067Z\"\n  },\n  \"message\": \"Cart cleared successfully\"\n}",
+    "cart-clear-button__title": "API Response",
+    "auth-logout-button": "{\n  \"success\": true,\n  \"message\": \"Logout successful\",\n  \"data\": {\n    \"sessionEnded\": \"2026-08-25T20:32:04.702Z\"\n  }\n}",
+    "auth-logout-button__title": "API Response"
+  },
+  "networkCalls": [
+    {
+      "method": "GET",
+      "url": "https://music-tech-shop.vercel.app/api-test",
+      "requestBody": "",
+      "status": 200,
+      "responseBody": "<!DOCTYPE html><html lang=\"en\" class=\"geist_a71539c9-module__T19VSG__variable geist_mono_8d43a2aa-module__8Li5zG__variable antialiased\"><head><meta charSet=\"utf-8\"/><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"/><link rel=\"preload\" href=\"/_next/static/immutable/media/797e433ab9"
+    },
+    {
+      "method": "GET",
+      "url": "https://music-tech-shop.vercel.app/?_rsc=sbhFAxpamvlUF893",
+      "requestBody": "",
+      "status": 200,
+      "responseBody": ":HL[\"/_next/static/immutable/chunks/1kuf0vy8_3887.css\",\"style\"]\n:HL[\"/_next/static/immutable/chunks/10wcf2mvus9-5.css\",\"style\"]\n:HL[\"/_next/static/immutable/media/797e433ab948586e-s.p.1v5bejj26fx9h.woff2\",\"font\",{\"crossOrigin\":\"\",\"type\":\"font/woff2\"}]\n:HL[\"/_next/static/immutable/media/caa3a2e1cccd8"
+    },
+    {
+      "method": "GET",
+      "url": "https://music-tech-shop.vercel.app/api-test?_rsc=sbhFAxpamvlUF893",
+      "requestBody": "",
+      "status": 200,
+      "responseBody": ":HL[\"/_next/static/immutable/chunks/1kuf0vy8_3887.css\",\"style\"]\n:HL[\"/_next/static/immutable/chunks/10wcf2mvus9-5.css\",\"style\"]\n:HL[\"/_next/static/immutable/media/797e433ab948586e-s.p.1v5bejj26fx9h.woff2\",\"font\",{\"crossOrigin\":\"\",\"type\":\"font/woff2\"}]\n:HL[\"/_next/static/immutable/media/caa3a2e1cccd8"
+    },
+    {
+      "method": "GET",
+      "url": "https://music-tech-shop.vercel.app/login?_rsc=sbhFAxpamvlUF893",
+      "requestBody": "",
+      "status": 200,
+      "responseBody": ":HL[\"/_next/static/immutable/chunks/1kuf0vy8_3887.css\",\"style\"]\n:HL[\"/_next/static/immutable/chunks/10wcf2mvus9-5.css\",\"style\"]\n:HL[\"/_next/static/immutable/media/797e433ab948586e-s.p.1v5bejj26fx9h.woff2\",\"font\",{\"crossOrigin\":\"\",\"type\":\"font/woff2\"}]\n:HL[\"/_next/static/immutable/media/caa3a2e1cccd8"
+    },
+    {
+      "method": "GET",
+      "url": "https://music-tech-shop.vercel.app/products?_rsc=sbhFAxpamvlUF893",
+      "requestBody": "",
+      "status": 200,
+      "responseBody": ":HL[\"/_next/static/immutable/chunks/1kuf0vy8_3887.css\",\"style\"]\n:HL[\"/_next/static/immutable/chunks/10wcf2mvus9-5.css\",\"style\"]\n:HL[\"/_next/static/immutable/media/797e433ab948586e-s.p.1v5bejj26fx9h.woff2\",\"font\",{\"crossOrigin\":\"\",\"type\":\"font/woff2\"}]\n:HL[\"/_next/static/immutable/media/caa3a2e1cccd8"
+    },
+    {
+      "method": "GET",
+      "url": "https://music-tech-shop.vercel.app/products?category=Electronics&_rsc=sbhFAxpamvlUF893",
+      "requestBody": "",
+      "status": 200,
+      "responseBody": ":HL[\"/_next/static/immutable/chunks/1kuf0vy8_3887.css\",\"style\"]\n:HL[\"/_next/static/immutable/chunks/10wcf2mvus9-5.css\",\"style\"]\n:HL[\"/_next/static/immutable/media/797e433ab948586e-s.p.1v5bejj26fx9h.woff2\",\"font\",{\"crossOrigin\":\"\",\"type\":\"font/woff2\"}]\n:HL[\"/_next/static/immutable/media/caa3a2e1cccd8"
+    },
+    {
+      "method": "GET",
+      "url": "https://music-tech-shop.vercel.app/about?_rsc=sbhFAxpamvlUF893",
+      "requestBody": "",
+      "status": 200,
+      "responseBody": ":HL[\"/_next/static/immutable/chunks/1kuf0vy8_3887.css\",\"style\"]\n:HL[\"/_next/static/immutable/chunks/10wcf2mvus9-5.css\",\"style\"]\n:HL[\"/_next/static/immutable/media/797e433ab948586e-s.p.1v5bejj26fx9h.woff2\",\"font\",{\"crossOrigin\":\"\",\"type\":\"font/woff2\"}]\n:HL[\"/_next/static/immutable/media/caa3a2e1cccd8"
+    },
+    {
+      "method": "GET",
+      "url": "https://music-tech-shop.vercel.app/products?category=Accessories&_rsc=sbhFAxpamvlUF893",
+      "requestBody": "",
+      "status": 200,
+      "responseBody": ":HL[\"/_next/static/immutable/chunks/1kuf0vy8_3887.css\",\"style\"]\n:HL[\"/_next/static/immutable/chunks/10wcf2mvus9-5.css\",\"style\"]\n:HL[\"/_next/static/immutable/media/797e433ab948586e-s.p.1v5bejj26fx9h.woff2\",\"font\",{\"crossOrigin\":\"\",\"type\":\"font/woff2\"}]\n:HL[\"/_next/static/immutable/media/caa3a2e1cccd8"
+    },
+    {
+      "method": "GET",
+      "url": "https://music-tech-shop.vercel.app/shipping?_rsc=sbhFAxpamvlUF893",
+      "requestBody": "",
+      "status": 200,
+      "responseBody": ":HL[\"/_next/static/immutable/chunks/1kuf0vy8_3887.css\",\"style\"]\n:HL[\"/_next/static/immutable/chunks/10wcf2mvus9-5.css\",\"style\"]\n:HL[\"/_next/static/immutable/media/797e433ab948586e-s.p.1v5bejj26fx9h.woff2\",\"font\",{\"crossOrigin\":\"\",\"type\":\"font/woff2\"}]\n:HL[\"/_next/static/immutable/media/caa3a2e1cccd8"
+    },
+    {
+      "method": "GET",
+      "url": "https://music-tech-shop.vercel.app/returns?_rsc=sbhFAxpamvlUF893",
+      "requestBody": "",
+      "status": 200,
+      "responseBody": ":HL[\"/_next/static/immutable/chunks/1kuf0vy8_3887.css\",\"style\"]\n:HL[\"/_next/static/immutable/chunks/10wcf2mvus9-5.css\",\"style\"]\n:HL[\"/_next/static/immutable/media/797e433ab948586e-s.p.1v5bejj26fx9h.woff2\",\"font\",{\"crossOrigin\":\"\",\"type\":\"font/woff2\"}]\n:HL[\"/_next/static/immutable/media/caa3a2e1cccd8"
+    },
+    {
+      "method": "GET",
+      "url": "https://music-tech-shop.vercel.app/terms?_rsc=sbhFAxpamvlUF893",
+      "requestBody": "",
+      "status": 200,
+      "responseBody": ":HL[\"/_next/static/immutable/chunks/1kuf0vy8_3887.css\",\"style\"]\n:HL[\"/_next/static/immutable/chunks/10wcf2mvus9-5.css\",\"style\"]\n:HL[\"/_next/static/immutable/media/797e433ab948586e-s.p.1v5bejj26fx9h.woff2\",\"font\",{\"crossOrigin\":\"\",\"type\":\"font/woff2\"}]\n:HL[\"/_next/static/immutable/media/caa3a2e1cccd8"
+    },
+    {
+      "method": "GET",
+      "url": "https://music-tech-shop.vercel.app/products?category=Photography&_rsc=sbhFAxpamvlUF893",
+      "requestBody": "",
+      "status": 200,
+      "responseBody": ":HL[\"/_next/static/immutable/chunks/1kuf0vy8_3887.css\",\"style\"]\n:HL[\"/_next/static/immutable/chunks/10wcf2mvus9-5.css\",\"style\"]\n:HL[\"/_next/static/immutable/media/797e433ab948586e-s.p.1v5bejj26fx9h.woff2\",\"font\",{\"crossOrigin\":\"\",\"type\":\"font/woff2\"}]\n:HL[\"/_next/static/immutable/media/caa3a2e1cccd8"
+    },
+    {
+      "method": "GET",
+      "url": "https://music-tech-shop.vercel.app/?_rsc=BFl9QtT0B6qdYVKj",
+      "requestBody": "",
+      "status": 200,
+      "responseBody": "1:\"$Sreact.fragment\"\n2:I[89554,[\"/_next/static/immutable/chunks/3t6f7eebwfab9.js\",\"/_next/static/immutable/chunks/328own_mpxo3h.js\",\"/_next/static/immutable/chunks/06rg662xsi152.js\",\"/_next/static/immutable/chunks/3kgmi5xri52lz.js\",\"/_next/static/immutable/chunks/0xpveqk3m33-1.js\",\"/_next/static/imm"
+    },
+    {
+      "method": "GET",
+      "url": "https://music-tech-shop.vercel.app/?_rsc=p7cpG1JGeCOtnu66",
+      "requestBody": "",
+      "status": 200,
+      "responseBody": "1:\"$Sreact.fragment\"\n2:I[72414,[\"/_next/static/immutable/chunks/3t6f7eebwfab9.js\",\"/_next/static/immutable/chunks/328own_mpxo3h.js\",\"/_next/static/immutable/chunks/06rg662xsi152.js\",\"/_next/static/immutable/chunks/3kgmi5xri52lz.js\",\"/_next/static/immutable/chunks/0xpveqk3m33-1.js\",\"/_next/static/imm"
+    },
+    {
+      "method": "GET",
+      "url": "https://music-tech-shop.vercel.app/api-test?_rsc=SySKqFT_Ft4Gago_",
+      "requestBody": "",
+      "status": 200,
+      "responseBody": "1:\"$Sreact.fragment\"\n2:I[86578,[\"/_next/static/immutable/chunks/3t6f7eebwfab9.js\",\"/_next/static/immutable/chunks/328own_mpxo3h.js\",\"/_next/static/immutable/chunks/06rg662xsi152.js\",\"/_next/static/immutable/chunks/3kgmi5xri52lz.js\",\"/_next/static/immutable/chunks/0xpveqk3m33-1.js\",\"/_next/static/imm"
+    },
+    {
+      "method": "GET",
+      "url": "https://music-tech-shop.vercel.app/login?_rsc=AtZSmutm_r6H8tLg",
+      "requestBody": "",
+      "status": 200,
+      "responseBody": "1:\"$Sreact.fragment\"\n2:I[86578,[\"/_next/static/immutable/chunks/3t6f7eebwfab9.js\",\"/_next/static/immutable/chunks/328own_mpxo3h.js\",\"/_next/static/immutable/chunks/06rg662xsi152.js\",\"/_next/static/immutable/chunks/3kgmi5xri52lz.js\",\"/_next/static/immutable/chunks/0xpveqk3m33-1.js\",\"/_next/static/imm"
+    },
+    {
+      "method": "GET",
+      "url": "https://music-tech-shop.vercel.app/products?_rsc=oV_L25FfeGQU5TJ4",
+      "requestBody": "",
+      "status": 200,
+      "responseBody": "1:\"$Sreact.fragment\"\n2:I[86578,[\"/_next/static/immutable/chunks/3t6f7eebwfab9.js\",\"/_next/static/immutable/chunks/328own_mpxo3h.js\",\"/_next/static/immutable/chunks/06rg662xsi152.js\",\"/_next/static/immutable/chunks/3kgmi5xri52lz.js\",\"/_next/static/immutable/chunks/0xpveqk3m33-1.js\",\"/_next/static/imm"
+    },
+    {
+      "method": "GET",
+      "url": "https://music-tech-shop.vercel.app/shipping?_rsc=EqyzHpEzkZM3mHSz",
+      "requestBody": "",
+      "status": 200,
+      "responseBody": "1:\"$Sreact.fragment\"\n2:I[86578,[\"/_next/static/immutable/chunks/3t6f7eebwfab9.js\",\"/_next/static/immutable/chunks/328own_mpxo3h.js\",\"/_next/static/immutable/chunks/06rg662xsi152.js\",\"/_next/static/immutable/chunks/3kgmi5xri52lz.js\",\"/_next/static/immutable/chunks/0xpveqk3m33-1.js\",\"/_next/static/imm"
+    },
+    {
+      "method": "GET",
+      "url": "https://music-tech-shop.vercel.app/about?_rsc=ugC9IskwhKWlhsZA",
+      "requestBody": "",
+      "status": 200,
+      "responseBody": "1:\"$Sreact.fragment\"\n2:I[12133,[\"/_next/static/immutable/chunks/3t6f7eebwfab9.js\",\"/_next/static/immutable/chunks/328own_mpxo3h.js\",\"/_next/static/immutable/chunks/06rg662xsi152.js\",\"/_next/static/immutable/chunks/3kgmi5xri52lz.js\",\"/_next/static/immutable/chunks/0xpveqk3m33-1.js\",\"/_next/static/imm"
+    },
+    {
+      "method": "GET",
+      "url": "https://music-tech-shop.vercel.app/terms?_rsc=a0Bp2zPKggJ_Z4nu",
+      "requestBody": "",
+      "status": 200,
+      "responseBody": "1:\"$Sreact.fragment\"\na:X\nf:X\nf:C\n0:{\"buildId\":\"-RQJvnjmr_pGinrpWEKIy\",\"data\":[{\"rsc\":[\"$\",\"$1\",\"c\",{\"children\":[[\"$\",\"div\",null,{\"className\":\"flex-1 bg-background\",\"data-testid\":\"terms-page\",\"children\":[[\"$\",\"section\",null,{\"className\":\"bg-muted/30 px-4 py-16\",\"data-testid\":\"terms-hero\",\"children\":["
+    },
+    {
+      "method": "GET",
+      "url": "https://music-tech-shop.vercel.app/returns?_rsc=dSPJw4SZuvqbjllu",
+      "requestBody": "",
+      "status": 200,
+      "responseBody": "1:\"$Sreact.fragment\"\n2:I[86578,[\"/_next/static/immutable/chunks/3t6f7eebwfab9.js\",\"/_next/static/immutable/chunks/328own_mpxo3h.js\",\"/_next/static/immutable/chunks/06rg662xsi152.js\",\"/_next/static/immutable/chunks/3kgmi5xri52lz.js\",\"/_next/static/immutable/chunks/0xpveqk3m33-1.js\",\"/_next/static/imm"
+    },
+    {
+      "method": "GET",
+      "url": "https://music-tech-shop.vercel.app/cookies?_rsc=sbhFAxpamvlUF893",
+      "requestBody": "",
+      "status": 404,
+      "responseBody": "<!DOCTYPE html><html lang=\"en\" class=\"geist_a71539c9-module__T19VSG__variable geist_mono_8d43a2aa-module__8Li5zG__variable antialiased\"><head><meta charSet=\"utf-8\"/><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"/><link rel=\"stylesheet\" href=\"/_next/static/immutable/chunks/1kuf0v"
+    },
+    {
+      "method": "GET",
+      "url": "https://music-tech-shop.vercel.app/privacy?_rsc=sbhFAxpamvlUF893",
+      "requestBody": "",
+      "status": 404,
+      "responseBody": "<!DOCTYPE html><html lang=\"en\" class=\"geist_a71539c9-module__T19VSG__variable geist_mono_8d43a2aa-module__8Li5zG__variable antialiased\"><head><meta charSet=\"utf-8\"/><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"/><link rel=\"stylesheet\" href=\"/_next/static/immutable/chunks/1kuf0v"
+    }
+  ]
+}

@@ -27,11 +27,29 @@ export class CartPage extends BasePage {
   getFreeShippingLabel(): Cypress.Chainable<JQuery<HTMLElement>> {
     return this.getByTestId('free-shipping-label')
   }
+  getFreeShippingThreshold(): Cypress.Chainable<JQuery<HTMLElement>> {
+    return this.getByTestId('free-shipping-threshold')
+  }
+  getItemName(): Cypress.Chainable<JQuery<HTMLElement>> {
+    return this.getByTestId('cart-item-product-name')
+  }
   getCartItem(productId: string | number): Cypress.Chainable<JQuery<HTMLElement>> {
     return this.getByTemplate('cart-item-${0}', productId)
   }
   getRemoveItemButton(productId: string | number): Cypress.Chainable<JQuery<HTMLElement>> {
     return this.getByTemplate('cart-remove-item-${0}', productId)
+  }
+  getQuantity(productId: string | number): Cypress.Chainable<JQuery<HTMLElement>> {
+    return this.getByTemplate('cart-quantity-${0}', productId)
+  }
+  getIncreaseQuantityButton(productId: string | number): Cypress.Chainable<JQuery<HTMLElement>> {
+    return this.getByTemplate('cart-increase-quantity-${0}', productId)
+  }
+  getDecreaseQuantityButton(productId: string | number): Cypress.Chainable<JQuery<HTMLElement>> {
+    return this.getByTemplate('cart-decrease-quantity-${0}', productId)
+  }
+  getItemTotalPrice(productId: string | number): Cypress.Chainable<JQuery<HTMLElement>> {
+    return this.getByTemplate('cart-item-total-price-${0}', productId)
   }
 
   /** All cart items currently rendered. */
