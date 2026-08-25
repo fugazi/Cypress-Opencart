@@ -15,7 +15,7 @@ export default defineConfig({
     embeddedScreenshots: true,
     inlineAssets: true,
     reportDir: 'cypress/report',
-    overwrite: false,
+    overwrite: true,
     html: true,
     json: false,
   },

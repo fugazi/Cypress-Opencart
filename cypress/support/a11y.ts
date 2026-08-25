@@ -38,18 +38,3 @@ Cypress.Commands.add('runA11yCheck', (context?: string) => {
     context: context as unknown as undefined,
   } as never)
 })
-
-// Cypress type augmentation requires the `namespace Cypress` pattern.
-declare global {
-  // eslint-disable-next-line @typescript-eslint/no-namespace
-  namespace Cypress {
-    interface Chainable {
-      /**
-       * Inject Axe and run an accessibility check, ignoring Vercel overlays.
-       */
-      runA11yCheck(context?: string): Cypress.Chainable<any>
-    }
-  }
-}
-
-export {}

@@ -2,7 +2,7 @@
 
 /**
  * Global Cypress type augmentations for the custom commands registered in
- * cypress/support/commands.ts.
+ * cypress/support/commands.ts and cypress/support/a11y.ts.
  */
 declare global {
   namespace Cypress {
@@ -63,6 +63,11 @@ declare global {
        * can target templated testids like `product-card-${id}`.
        */
       getFirstProductId(): Chainable<string>
+
+      /**
+       * Inject Axe and run an accessibility check, ignoring Vercel overlays.
+       */
+      runA11yCheck(context?: string): Chainable<void>
     }
   }
 }
