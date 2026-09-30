@@ -57,6 +57,9 @@ describe('Products catalog', () => {
   })
 
   it('adds a product to the cart from the listing', () => {
+    // Discovered app contract (Fase 2): add-to-cart requires authentication —
+    // anonymously the app redirects to /login?redirect=... instead of adding.
+    cy.loginAsCustomer()
     productsPage.getFirstProductId().then((id) => {
       productsPage.addToCart(id)
       // The cart badge in the header only renders once the cart has items.

@@ -9,6 +9,14 @@ export class CartPage extends BasePage {
   getEmptyCart(): Cypress.Chainable<JQuery<HTMLElement>> {
     return this.getByTestId('empty-cart')
   }
+  /**
+   * Either cart state: the order summary (items present) or the empty state.
+   * A single comma selector keeps the assertion retryable — the whole cart
+   * section is client-rendered and neither testid exists before hydration.
+   */
+  getCartSection(): Cypress.Chainable<JQuery<HTMLElement>> {
+    return cy.get('[data-testid="order-summary-card"], [data-testid="empty-cart"]')
+  }
   getSubtotal(): Cypress.Chainable<JQuery<HTMLElement>> {
     return this.getByTestId('cart-subtotal')
   }
@@ -62,20 +70,22 @@ export class CartPage extends BasePage {
     return cy.get('[data-testid^="cart-remove-item-"]')
   }
 
-  removeItem(productId: string | number): Cypress.Chainable<JQuery<HTMLElement>> {
-    return this.getRemoveItemButton(productId).click()
+  removeItem(productId: string | number): Cypress.Chainable<void> {
+    // Removing an item re-renders the cart list; the native dispatch avoids
+    // losing the button to its own re-render (see clickTestId docs).
+    return cy.clickTestId(`cart-remove-item-${productId}`)
   }
 
-  checkout(): Cypress.Chainable<JQuery<HTMLElement>> {
-    return this.getCheckoutButton().click()
+  checkout(): Cypress.Chainable<void> {
+    return cy.clickTestId('checkout-button')
   }
 
   waitForPage(): Cypress.Chainable<any> {
-    // The cart layout varies: with items it shows order-summary-card, when
-    // empty it shows empty-cart, and on auth redirect it shows the login form.
-    // Just wait for the body to be visible; individual specs assert the
-    // specific elements they need.
-    return cy.get('body').should('be.visible')
+    // The cart section is client-rendered: with items it shows
+    // order-summary-card, when empty it shows empty-cart. The comma selector
+    // resolves once either state hydrates; on auth redirect it never does and
+    // the timeout surfaces the redirect.
+    return this.getCartSection().should('exist')
   }
 }
 

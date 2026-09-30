@@ -17,12 +17,9 @@ describe('Cart', () => {
 
   it('renders the order summary or the empty state', () => {
     cartPage.visit()
-    cy.get('body').then(($body) => {
-      const hasSummary = $body.find('[data-testid="order-summary-card"]').length > 0
-      const hasEmpty = $body.find('[data-testid="empty-cart"]').length > 0
-      expect(hasSummary || hasEmpty, 'cart renders either the summary or the empty state').to.be
-        .true
-    })
+    // Retryable OR assertion: the cart section is client-rendered, so a
+    // one-shot body check races hydration.
+    cartPage.getCartSection().should('exist')
   })
 
   it('adds a product and sees it reflected in the cart', () => {
@@ -41,7 +38,7 @@ describe('Cart', () => {
     cy.getFirstProductId().then((id) => {
       cy.addProductToCart(id)
       cartPage.visit()
-      cartPage.getRemoveItemButton(id).click()
+      cartPage.removeItem(id)
       cartPage.getCartItem(id).should('not.exist')
       cartPage.getEmptyCart().should('be.visible')
     })

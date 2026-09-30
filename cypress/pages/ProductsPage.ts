@@ -52,12 +52,18 @@ export class ProductsPage extends BasePage {
     return cy.get('[data-testid^="product-card-"]')
   }
 
-  /** First product id on the listing (resolved from the templated testid). */
+  /**
+   * A product id whose add-to-cart button is actually rendered. The id is read
+   * from the add-to-cart buttons instead of the first card: during hydration
+   * the grid briefly shows a pre-sort layout, so "first card" can return a
+   * product whose button is not on the settled page.
+   */
   getFirstProductId(): Cypress.Chainable<string> {
-    return this.getAllCards()
+    return cy
+      .get('[data-testid^="product-add-to-cart-button-"]')
       .first()
       .invoke('attr', 'data-testid')
-      .then((testId) => (testId ?? '').replace('product-card-', ''))
+      .then((testId) => (testId ?? '').replace('product-add-to-cart-button-', ''))
   }
 
   search(term: string): Cypress.Chainable<JQuery<HTMLElement>> {
@@ -80,16 +86,19 @@ export class ProductsPage extends BasePage {
       .then(() => cy.get('[role="option"]').contains(option).click())
   }
 
-  addToCart(productId: string | number): Cypress.Chainable<JQuery<HTMLElement>> {
-    return this.getAddToCartButton(productId).click()
+  addToCart(productId: string | number): Cypress.Chainable<void> {
+    // Card buttons live in a selectively-hydrated subtree; native dispatch
+    // avoids losing the click to the hydration replacement (see clickTestId).
+    return cy.clickTestId(`product-add-to-cart-button-${productId}`)
   }
 
-  openProduct(productId: string | number): Cypress.Chainable<JQuery<HTMLElement>> {
-    return this.getDetailsButton(productId).click()
+  openProduct(productId: string | number): Cypress.Chainable<void> {
+    return cy.clickTestId(`product-details-button-${productId}`)
   }
 
   waitForPage(): Cypress.Chainable<any> {
     return cy
+      .waitForProductsSettled()
       .get('[data-testid^="product-card-"]')
       .should('have.length.gte', 1)
       .first()

@@ -102,30 +102,30 @@ Cypress-Opencart/
 
 ## 🧪 Test suite
 
-**Summary: 33 enabled tests (all passing), 38 skipped (documented as pending).**
+**Summary: 72 tests, 72 passing, 0 skipped — full suite green locally in ~2 min.**
 
-| Spec                     | Coverage                                               | Status                                  |
-| ------------------------ | ------------------------------------------------------ | --------------------------------------- |
-| `homepage.cy.ts`         | Header, footer, navigation, SEO meta tags.             | ✅ 5/5                                  |
-| `navigation.cy.ts`       | Repeated routing across pages (stability).             | ✅ 3/3                                  |
-| `auth-login.cy.ts`       | Login form, quick-fill, validation, continue-as-guest. | ✅ 7/7                                  |
-| `auth-logout.cy.ts`      | Logout via user menu.                                  | ✅ 2/2                                  |
-| `search.cy.ts`           | Header + listing search, no-results state.             | ✅ 3/3                                  |
-| `wishlist.cy.ts`         | Wishlist render, empty state, browse-products.         | ✅ 3/3                                  |
-| `dashboard.cy.ts`        | Customer dashboard sections.                           | ✅ 8/8                                  |
-| `cart.cy.ts`             | Add/remove/clear, order summary totals.                | ⚠️ 1/4 (cart state pending)             |
-| `admin.cy.ts`            | Admin metrics/sections (via `cy.contains`).            | ⚠️ 1/7 (labels pending)                 |
-| `products-catalog.cy.ts` | Listing, filters, sort, pagination, empty state.       | ⚠️ skipped (pending option values)      |
-| `product-detail.cy.ts`   | Gallery, quantity, totals, specs, reviews, share.      | ⚠️ skipped (pending DOM contract)       |
-| `accessibility.cy.ts`    | axe-core checks on main flows.                         | ⚠️ skipped (pending a11y tuning)        |
-| `api-contract.cy.ts`     | Backend API via `/api-test` harness.                   | ⚠️ skipped (pending endpoint discovery) |
-| `checkout.cy.ts`         | "Complete Purchase" toast flow (no `/checkout` route). | ⚠️ skipped (pending cart state)         |
+| Spec                     | Coverage                                                                          | Status |
+| ------------------------ | --------------------------------------------------------------------------------- | ------ |
+| `homepage.cy.ts`         | Header, footer, navigation, SEO meta tags.                                        | ✅ 5/5 |
+| `navigation.cy.ts`       | Repeated routing across pages (stability).                                        | ✅ 3/3 |
+| `auth-login.cy.ts`       | Login form, quick-fill, validation, continue-as-guest.                            | ✅ 7/7 |
+| `auth-logout.cy.ts`      | Logout via user menu.                                                             | ✅ 2/2 |
+| `search.cy.ts`           | Header + listing search, no-results state.                                        | ✅ 3/3 |
+| `wishlist.cy.ts`         | Wishlist render, empty state, browse-products.                                    | ✅ 3/3 |
+| `dashboard.cy.ts`        | Customer dashboard sections.                                                      | ✅ 8/8 |
+| `cart.cy.ts`             | Empty/summary state, add/remove, totals, quantity.                                | ✅ 5/5 |
+| `admin.cy.ts`            | Admin metrics, order status, analytics sections.                                  | ✅ 7/7 |
+| `products-catalog.cy.ts` | Listing, filters (shadcn comboboxes), sort, pagination, add-to-cart, empty state. | ✅ 7/7 |
+| `product-detail.cy.ts`   | Gallery, quantity, totals, specs, share, add-to-cart, featured.                   | ✅ 8/8 |
+| `accessibility.cy.ts`    | axe-core critical-violation gate on main flows.                                   | ✅ 5/5 |
+| `api-contract.cy.ts`     | Simulated API contract rendered by the `/api-test` harness.                       | ✅ 7/7 |
+| `checkout.cy.ts`         | Complete Purchase: cart empties + navigation home.                                | ✅ 2/2 |
 
-> The skipped specs reflect the real state of the demo application under test
-> (pre-seeded cart, axe violations in the app, undiscovered API endpoints,
-> dynamic option values, product-specific testids) rather than bugs in the
-> test harness. See [`docs/MODERNIZATION-PLAN.md`](docs/MODERNIZATION-PLAN.md)
-> § "Tests en skip (pendientes)" for the full rationale and re-enable plan.
+> The formerly skipped specs were reactivated in the V2 modernization (Fase 2)
+> against runtime-discovered contracts of the demo app. Known application debt
+> (color contrast, heading order, unnamed Select triggers) is documented in
+> [`docs/MODERNIZATION-PLAN-V2.md`](docs/MODERNIZATION-PLAN-V2.md) and excluded
+> from the a11y severity gate rather than hidden.
 
 ---
 

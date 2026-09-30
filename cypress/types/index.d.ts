@@ -44,6 +44,12 @@ declare global {
       logout(): Chainable<void>
 
       /**
+       * Wait for the /products listing to settle after hydration (result
+       * count rendered, sort and pagination state applied).
+       */
+      waitForProductsSettled(): Chainable<void>
+
+      /**
        * Add a product to the cart from the products listing.
        */
       addProductToCart(productId: number | string, qty?: number): Chainable<void>
@@ -57,6 +63,14 @@ declare global {
        * Dismiss Vercel toolbar / theme overlays that can intercept clicks.
        */
       dismissOverlays(): Chainable<void>
+
+      /**
+       * Click an element by testid through its live DOM node (resolves the
+       * instance with a layout box, scrolls it into view, waits for React
+       * hydration, then dispatches natively). Only for plain onClick handlers
+       * — Radix primitives need cy.click().
+       */
+      clickTestId(testId: string, scope?: string): Chainable<void>
 
       /**
        * Resolve the first visible product id on the current listing so specs

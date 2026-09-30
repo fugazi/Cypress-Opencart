@@ -43,17 +43,26 @@ describe('Product detail page', () => {
 
   it('updates the total price when the quantity changes', () => {
     productDetailPage.visitProduct(productId)
-    productDetailPage.getTotalPrice().invoke('text').as('initialTotal')
-    productDetailPage.increaseQuantity(1)
-    productDetailPage.getTotalPrice().then(($total) => {
-      cy.get<string>('@initialTotal').then((initial) => {
-        const parsePrice = (s: string) => parseFloat(s.replace(/[^0-9.]/g, '')) || 0
-        expect(parsePrice($total.text())).to.be.greaterThan(parsePrice(initial))
+    const parsePrice = (s: string) => parseFloat(s.replace(/[^0-9.]/g, '')) || 0
+    let initial = 0
+    productDetailPage
+      .getTotalPrice()
+      .invoke('text')
+      .then((text) => {
+        initial = parsePrice(text)
       })
+    productDetailPage.increaseQuantity(1)
+    // Retryable read: a one-shot .then() can capture the pre-commit node and
+    // compare a stale total.
+    productDetailPage.getTotalPrice().should(($total) => {
+      expect(parsePrice($total.text()), 'total updates with quantity').to.be.greaterThan(initial)
     })
   })
 
   it('adds the product to the cart', () => {
+    // Discovered app contract (Fase 2): add-to-cart requires authentication —
+    // anonymously the app redirects to /login?redirect=... instead of adding.
+    cy.loginAsCustomer()
     productDetailPage.visitProduct(productId)
     productDetailPage.addToCart()
     cy.getByTestId('cart-badge').should('exist')
