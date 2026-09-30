@@ -8,8 +8,8 @@
 > quedó tras esa ejecución: tests skipeados, dependencias atrasadas e higiene del
 > tooling.
 >
-> Estado: **Fases 1 y 2 completadas** (Fase 1: agosto 2026; Fase 2: septiembre
-> 2026). Las fases se ejecutan en orden.
+> Estado: **Fases 1–3 completadas** (Fase 1: agosto 2026; Fases 2 y 3:
+> septiembre 2026). Solo resta la Fase 4 (opcional).
 
 ---
 
@@ -319,13 +319,29 @@ Puntos técnicos del reporter: `cypress-axe-core` imprime sus violaciones vía
 
 **Orden recomendado:**
 
-1. [ ] `eslint` 10 + `eslint-config-prettier` 10 + `eslint-plugin-cypress` 7
+1. [x] `eslint` 10 + `eslint-config-prettier` 10 + `eslint-plugin-cypress` 7
        (juntos: ajustar `eslint.config.js` a las reglas renombradas/eliminadas).
-2. [ ] `cypress-mochawesome-reporter` 5 (revisar `reporterOptions` y el
+2. [x] `cypress-mochawesome-reporter` 5 (revisar `reporterOptions` y el
        `register` en `support/e2e.ts`; verificar el HTML generado).
 
 **Validación local tras cada salto:** `npm run lint` + `npx tsc --noEmit` +
 run de specs base + suite completa al cerrar la fase.
+
+**Ejecución (septiembre 2026):** versiones instaladas — `eslint` 10.11.0,
+`@eslint/js` 10.0.1, `eslint-config-prettier` 10.1.8,
+`eslint-plugin-cypress` 7.0.2, `cypress-mochawesome-reporter` 5.0.0.
+
+Salto 1: ESLint 10 ya no empaqueta `@eslint/js` — se agregó como dependencia
+explícita. `typescript-eslint` 8.68 y el resto de la config funcionaron sin
+cambios: las 5 reglas de Cypress resuelven con sus severidades configuradas
+(verificado con `--print-config`). Validación: lint/tsc/prettier limpios y
+specs base 12/12.
+
+Salto 2: el reporter v5 requiere Node ≥ 22 (local: v24.13.0); el hook
+`register` mantiene la misma API y las `reporterOptions` existentes se
+delegan a mochawesome sin cambios. Validación: suite completa 72/72 en ~2:14
+min y HTML único regenerado (título custom, screenshots embebidos, sin
+acumulación).
 
 ---
 
@@ -364,7 +380,7 @@ run de specs base + suite completa al cerrar la fase.
 - [x] Cero `cy.wait` hardcodeados estabilizadores y cero `force: true` en
       `cypress/support/commands.ts` (el único `wait` restante es el pacing del
       debounce de clicks de cantidad, documentado en el page object).
-- [ ] Majors actualizadas (`eslint` 10, `eslint-plugin-cypress` 7, `eslint-config-prettier` 10, `cypress-mochawesome-reporter` 5) con la excepción de TypeScript 7 documentada en [§4.3](#43-excluidas). → **Fase 3**.
+- [x] Majors actualizadas (`eslint` 10.11, `eslint-plugin-cypress` 7.0, `eslint-config-prettier` 10.1, `cypress-mochawesome-reporter` 5.0) con la excepción de TypeScript 7 documentada en [§4.3](#43-excluidas).
 - [x] `npm run lint` + `npx tsc --noEmit` limpios al cierre de cada fase.
 
 ---
