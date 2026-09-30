@@ -18,9 +18,9 @@ describe('Navigation — repeated routing', () => {
     it(`renders every page without error (iteration ${iteration + 1}/3)`, () => {
       routes.forEach((route) => {
         route.trigger()
-        cy.get('body').should('be.visible')
-        // No client-side error page.
-        cy.get('body').should('not.contain', 'Application error')
+        // cy.visit already guarantees a rendered DOM; the real regression to
+        // catch is the client-side error page rendering inside it.
+        cy.contains('Application error').should('not.exist')
       })
     })
   })

@@ -8,8 +8,10 @@
 > quedó tras esa ejecución: tests skipeados, dependencias atrasadas e higiene del
 > tooling.
 >
-> Estado: **Fases 1–3 completadas** (Fase 1: agosto 2026; Fases 2 y 3:
-> septiembre 2026). Solo resta la Fase 4 (opcional).
+> Estado: **PROYECTO COMPLETADO** — Fases 1–4 ejecutadas (Fase 1: agosto 2026;
+> Fases 2–4: septiembre 2026). Los ítems restantes de la Fase 4 (matrix de
+> viewports, regresión visual, TypeScript 7) quedaron fuera de alcance por
+> decisión explícita del 30/09/2026.
 
 ---
 
@@ -349,13 +351,36 @@ acumulación).
 
 **Objetivo:** backlog de mejoras posteriores. Sin orden estricto:
 
-- [ ] **`husky` + `lint-staged`**: pre-commit con ESLint/Prettier sobre archivos
+- [x] **`husky` + `lint-staged`**: pre-commit con ESLint/Prettier sobre archivos
       modificados. Gana peso como quality gate dado que no hay CI (Decisión 1).
-- [ ] **`cypress/require-data-selectors: error`**: el POM ya lo justifica.
+- [x] **`cypress/require-data-selectors: error`**: el POM ya lo justifica.
 - [ ] **Matrix de viewports** desktop/tablet/mobile — separar specs: el search
       del header es desktop-only (`hidden md:block`).
 - [ ] **Regresión visual** (Percy o similar).
 - [ ] **Reevaluar TypeScript 7** cuando Cypress declare soporte oficial.
+
+**Ejecución (30/09/2026) — puntos 1 y 2, con decisión de alcance:** la matrix
+de viewports, la regresión visual y la reevaluación de TypeScript 7 quedan
+**fuera del alcance del proyecto por decisión explícita** (2026-09-30) y no se
+realizarán; el backlog restante se cierra con esta fase.
+
+1. `husky` 9.1 + `lint-staged` 17.6: hook `pre-commit` (`npx lint-staged`) con
+   configuración en `package.json` — `cypress/**/*.ts` pasa por
+   `eslint --fix` + `prettier --write`; raíz `*.{ts,json}` y `**/*.md` por
+   `prettier --write`. Validado end-to-end: un commit con un selector frágil
+   (`cy.get('.class')`) queda bloqueado y los archivos se revierten; el
+   formato se autocorrige y se re-stagea automáticamente.
+2. `cypress/require-data-selectors: error` **con scope a los specs**
+   (`cypress/e2e/**/*.cy.ts`): la capa donde los selectores artesanales son el
+   riesgo real; los page objects y support quedan exentos porque allí viven
+   selectores estructurales legítimos (`cy.get('body')`, las opciones
+   `[role="option"]` del portal de Radix y los getters `main`-escopeados que
+   filtran el bloque DOM duplicado de la app). Ajustes para cumplir la regla
+   en specs: la consulta de estado de wishlist se movió al page object
+   (`wishlistPage.isEmptyState()` vía `cy.document()`), y navigation pasó el
+   chequeo de página de error a `cy.contains('Application error').should('not.exist')`
+   (el `cy.get('body').should('be.visible')` era redundante: `cy.visit` ya
+   garantiza un DOM renderizado).
 
 ---
 

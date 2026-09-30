@@ -33,7 +33,20 @@
     "lint:fix": "eslint cypress --fix",
     "format": "prettier --write \"cypress/**/*.ts\" \"*.{ts,json,md}\"",
     "format:check": "prettier --check \"cypress/**/*.ts\" \"*.{ts,json,md}\"",
-    "report:clean": "rimraf cypress/report cypress/results"
+    "report:clean": "rimraf cypress/report cypress/results",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "cypress/**/*.ts": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{ts,json}": [
+      "prettier --write"
+    ],
+    "**/*.md": [
+      "prettier --write"
+    ]
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
@@ -45,6 +58,8 @@
     "eslint": "^10.11.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-cypress": "^7.0.2",
+    "husky": "^9.1.7",
+    "lint-staged": "^17.6.0",
     "prettier": "^3.3.0",
     "rimraf": "^6.0.1",
     "typescript": "^5.5.0",

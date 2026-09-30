@@ -68,6 +68,18 @@ module.exports = tseslint.config(
     },
   },
 
+  // Specs must not hand-roll content selectors: everything goes through the
+  // page objects' data-testid getters. The rule stays off in page objects and
+  // support files — that layer legitimately owns structural selectors (body
+  // sanity checks, Radix [role="option"] portal options, the `main`-scoped
+  // getters that filter the app's invisible duplicate DOM block).
+  {
+    files: ['cypress/e2e/**/*.cy.ts'],
+    rules: {
+      'cypress/require-data-selectors': 'error',
+    },
+  },
+
   // The Cypress config file runs in Node, not in the browser.
   {
     files: ['cypress.config.ts'],
