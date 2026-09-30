@@ -41,7 +41,7 @@
     "axe-core": "^4.12.1",
     "cypress": "^15.18.0",
     "cypress-axe-core": "^2.0.0",
-    "cypress-mochawesome-reporter": "^3.8.4",
+    "cypress-mochawesome-reporter": "^5.0.0",
     "eslint": "^10.11.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-cypress": "^7.0.2",
