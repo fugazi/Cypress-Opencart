@@ -17,8 +17,8 @@ describe('Wishlist', () => {
   it('shows the empty state when the wishlist has no items', () => {
     // The wishlist may or may not be empty depending on prior state; if empty,
     // assert the empty message, otherwise assert items are present.
-    cy.get('body').then(($body) => {
-      if ($body.find('[data-testid="empty-wishlist"]').length > 0) {
+    wishlistPage.isEmptyState().then((isEmpty) => {
+      if (isEmpty) {
         wishlistPage.getEmptyWishlist().should('be.visible')
         wishlistPage.getBrowseProductsButton().should('be.visible')
       } else {
@@ -28,8 +28,8 @@ describe('Wishlist', () => {
   })
 
   it('offers a way back to browse products from the empty state', () => {
-    cy.get('body').then(($body) => {
-      if ($body.find('[data-testid="empty-wishlist"]').length > 0) {
+    wishlistPage.isEmptyState().then((isEmpty) => {
+      if (isEmpty) {
         wishlistPage.browseProducts()
         cy.url().should('include', '/products')
       }

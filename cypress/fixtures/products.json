@@ -3,25 +3,11 @@
     {
       "id": 1,
       "slug": "1",
-      "name": "Arturia MicroFreak",
+      "name": "Premium Wireless Headphones",
       "category": "Electronics",
-      "price": 599
-    },
-    {
-      "id": 2,
-      "slug": "2",
-      "name": "Focusrite Scarlett Solo",
-      "category": "Accessories",
-      "price": 119
-    },
-    {
-      "id": 3,
-      "slug": "3",
-      "name": "Behringer RD-8",
-      "category": "Electronics",
-      "price": 399
+      "price": 299.99
     }
   ],
-  "categories": ["Electronics", "Accessories", "Photography"],
-  "sortOptions": ["price-asc", "price-desc", "name-asc", "name-desc", "newest"]
+  "categories": ["Electronics", "Photography", "Accessories", "Synthesizers", "Studio Recording"],
+  "sortOptions": ["Price (Low to High)", "Name (A-Z)"]
 }

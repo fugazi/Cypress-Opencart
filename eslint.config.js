@@ -2,7 +2,7 @@
 /**
  * ESLint flat config for the Cypress + TypeScript project.
  *
- * ESLint 9 uses the flat config format (eslint.config.js) by default.
+ * ESLint 10 (flat config is the only format — eslint.config.js).
  */
 const js = require('@eslint/js')
 const tseslint = require('typescript-eslint')
@@ -65,6 +65,18 @@ module.exports = tseslint.config(
       // Chai assertions like `expect(x).to.be.true` are flagged as unused
       // expressions; they are idiomatic in Cypress specs.
       '@typescript-eslint/no-unused-expressions': 'off',
+    },
+  },
+
+  // Specs must not hand-roll content selectors: everything goes through the
+  // page objects' data-testid getters. The rule stays off in page objects and
+  // support files — that layer legitimately owns structural selectors (body
+  // sanity checks, Radix [role="option"] portal options, the `main`-scoped
+  // getters that filter the app's invisible duplicate DOM block).
+  {
+    files: ['cypress/e2e/**/*.cy.ts'],
+    rules: {
+      'cypress/require-data-selectors': 'error',
     },
   },
 

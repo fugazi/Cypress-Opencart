@@ -4,58 +4,65 @@ import type { ProductsFixture } from '@support/types'
 /**
  * Products catalog ("/products").
  *
- * Validates listing, count, category filters, sorting and the empty state.
- *
- * ⚠️ SKIPPED (pending investigation): filter/sort assertions depend on the
- * exact option values exposed by the app's `category-filter` / `sort-filter`
- * selects, and several other assertions (pagination, add-to-cart badge) are
- * flaky against the demo catalog. Re-enable once the real option values and
- * DOM contract are confirmed.
- * See docs/MODERNIZATION-PLAN.md § "Tests en skip (pendientes)".
+ * The category/sort filters are shadcn/ui comboboxes (BUTTON[role=combobox]
+ * with portal-rendered options), NOT native <select> elements — selection is
+ * trigger click + option click (Fase 2 runtime discovery).
  */
-describe.skip('Products catalog', () => {
+describe('Products catalog', () => {
   beforeEach(() => {
     productsPage.visit()
   })
 
-  it('renders at least one product card', () => {
+  it('renders at least one product card and the result count', () => {
     productsPage.getAllCards().should('have.length.gte', 1)
-    productsPage.getProductsCount().should('be.visible')
+    productsPage.getProductsCount().should('be.visible').and('contain.text', 'products')
   })
 
-  it.skip('filters products by category (pending filter option values)', () => {
+  it('filters products by category', () => {
     cy.fixture<ProductsFixture>('products.json').then((fixture) => {
       const category = fixture.categories[0]
-      productsPage.filterByCategory(category)
-      // Each visible card's category testid should reflect the filter.
+      productsPage.selectCategory(category)
+      productsPage.getAllCards().should('have.length.gte', 1)
       productsPage.getAllCards().each(($card) => {
         const id = ($card.attr('data-testid') ?? '').replace('product-card-', '')
-        productsPage.getByTestId(`product-category-${id}`).should('contain', category)
+        productsPage
+          .getByTestId(`product-category-${id}`)
+          .invoke('text')
+          .should('contain', category)
       })
     })
   })
 
-  it.skip('changes the sort order without breaking the listing (pending sort option values)', () => {
+  it('sorts products by price ascending', () => {
     cy.fixture<ProductsFixture>('products.json').then((fixture) => {
-      const option = fixture.sortOptions[0]
-      productsPage.sortBy(option)
+      productsPage.selectSort(fixture.sortOptions[0])
       productsPage.getAllCards().should('have.length.gte', 1)
+      productsPage.getAllCards().then(($cards) => {
+        const prices = $cards.toArray().map((card) => {
+          const id = (card.getAttribute('data-testid') ?? '').replace('product-card-', '')
+          const text = Cypress.$(`[data-testid="product-price-${id}"]`).text()
+          return parseFloat(text.replace(/[^0-9.]/g, '')) || 0
+        })
+        const sorted = [...prices].sort((a, b) => a - b)
+        expect(prices, 'visible prices are in ascending order').to.deep.equal(sorted)
+      })
     })
   })
 
-  it('paginates with next/prev controls when available', () => {
-    productsPage.getPaginationNext().then(($btn) => {
-      if ($btn.is(':visible') && !$btn.prop('disabled')) {
-        cy.wrap($btn).click()
-        productsPage.getPaginationPrev().should('exist')
-      }
-    })
+  it('paginates with next/prev controls', () => {
+    productsPage.getPaginationNext().should('be.visible').and('not.be.disabled')
+    productsPage.getPaginationNext().click()
+    productsPage.getProductsCount().should('contain.text', 'Page 2')
+    productsPage.getPaginationPrev().should('exist')
   })
 
   it('adds a product to the cart from the listing', () => {
+    // Discovered app contract (Fase 2): add-to-cart requires authentication —
+    // anonymously the app redirects to /login?redirect=... instead of adding.
+    cy.loginAsCustomer()
     productsPage.getFirstProductId().then((id) => {
       productsPage.addToCart(id)
-      // The cart badge in the header should reflect the new item.
+      // The cart badge in the header only renders once the cart has items.
       cy.getByTestId('cart-badge').should('exist')
     })
   })

@@ -1,51 +1,35 @@
 import { cartPage } from '@pages/CartPage'
 import { checkoutFlow } from '@pages/CheckoutFlow'
-import { productsPage } from '@pages/ProductsPage'
 
 /**
  * Checkout flow.
  *
  * The Music-Tech Shop app has no dedicated /checkout route. The "Complete
- * Purchase" button on /cart triggers a client-side flow that shows a
- * "Purchase Complete" toast. This suite asserts that toast.
+ * Purchase" button on /cart triggers a client-side flow: the cart is emptied
+ * and the app navigates back to the storefront (Fase 2 runtime discovery —
+ * there is no "Purchase Complete" toast; the empty cart + navigation ARE the
+ * observable success contract).
  */
-/**
- * Checkout flow.
- *
- * The Music-Tech Shop app has no dedicated /checkout route. The "Complete
- * Purchase" button on /cart triggers a client-side flow that shows a
- * "Purchase Complete" toast. This suite asserts that toast.
- *
- * ⚠️ SKIPPED (pending cart state investigation): the demo customer cart ships
- * with pre-seeded state and the checkout button / toast contract needs to be
- * confirmed against the live app. Re-enable alongside cart.cy.ts.
- * See docs/MODERNIZATION-PLAN.md § "Tests en skip (pendientes)".
- */
-describe.skip('Checkout — Complete Purchase', () => {
+describe('Checkout — Complete Purchase', () => {
   beforeEach(() => {
     // /cart requires authentication; log in as the customer first.
     cy.loginAsCustomer()
   })
 
-  it('completes a purchase and shows the success toast', () => {
+  it('completes a purchase: the cart empties and the app navigates home', () => {
     cy.clearCart()
-    productsPage.visit()
-    productsPage.getFirstProductId().then((id) => {
-      productsPage.addToCart(id)
+    cy.getFirstProductId().then((id) => {
+      cy.addProductToCart(id)
       cartPage.visit()
       checkoutFlow.completePurchase()
+      checkoutFlow.assertPurchaseCompleted()
     })
   })
 
-  it('disables or hides checkout when the cart is empty', () => {
+  it('does not render the checkout button when the cart is empty', () => {
     cy.clearCart()
     cartPage.visit()
-    cartPage.getCheckoutButton().then(($btn) => {
-      // The app either hides or disables the button when the cart is empty.
-      cy.wrap($btn).should(
-        'satisfy',
-        ($el) => $el.length === 0 || $el.is(':disabled') || !$el.is(':visible'),
-      )
-    })
+    cartPage.getCheckoutButton().should('not.exist')
+    cartPage.getEmptyCart().should('be.visible')
   })
 })

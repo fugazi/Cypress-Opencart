@@ -2,7 +2,7 @@
 
 /**
  * Global Cypress type augmentations for the custom commands registered in
- * cypress/support/commands.ts.
+ * cypress/support/commands.ts and cypress/support/a11y.ts.
  */
 declare global {
   namespace Cypress {
@@ -44,6 +44,12 @@ declare global {
       logout(): Chainable<void>
 
       /**
+       * Wait for the /products listing to settle after hydration (result
+       * count rendered, sort and pagination state applied).
+       */
+      waitForProductsSettled(): Chainable<void>
+
+      /**
        * Add a product to the cart from the products listing.
        */
       addProductToCart(productId: number | string, qty?: number): Chainable<void>
@@ -59,10 +65,23 @@ declare global {
       dismissOverlays(): Chainable<void>
 
       /**
+       * Click an element by testid through its live DOM node (resolves the
+       * instance with a layout box, scrolls it into view, waits for React
+       * hydration, then dispatches natively). Only for plain onClick handlers
+       * — Radix primitives need cy.click().
+       */
+      clickTestId(testId: string, scope?: string): Chainable<void>
+
+      /**
        * Resolve the first visible product id on the current listing so specs
        * can target templated testids like `product-card-${id}`.
        */
       getFirstProductId(): Chainable<string>
+
+      /**
+       * Inject Axe and run an accessibility check, ignoring Vercel overlays.
+       */
+      runA11yCheck(context?: string): Chainable<void>
     }
   }
 }

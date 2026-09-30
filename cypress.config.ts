@@ -15,7 +15,7 @@ export default defineConfig({
     embeddedScreenshots: true,
     inlineAssets: true,
     reportDir: 'cypress/report',
-    overwrite: false,
+    overwrite: true,
     html: true,
     json: false,
   },
@@ -47,6 +47,21 @@ export default defineConfig({
     setupNodeEvents(on, config) {
       // Register the Mochawesome reporter hooks.
       require('cypress-mochawesome-reporter/plugin')(on)
+
+      // cypress-axe-core's consoleReporter prints violations via cy.task()
+      // calls ('log' for messages, 'table' for the violations summary).
+      on('task', {
+        log(message: string) {
+          // eslint-disable-next-line no-console
+          console.log(message)
+          return null
+        },
+        table(data: unknown) {
+          // eslint-disable-next-line no-console
+          console.table(data as string[])
+          return null
+        },
+      })
 
       // Log the resolved baseUrl so it is visible in the runner output.
       // eslint-disable-next-line no-console
