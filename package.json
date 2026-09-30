@@ -36,14 +36,15 @@
     "report:clean": "rimraf cypress/report cypress/results"
   },
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
     "@types/node": "^22.0.0",
     "axe-core": "^4.12.1",
     "cypress": "^15.18.0",
     "cypress-axe-core": "^2.0.0",
     "cypress-mochawesome-reporter": "^3.8.4",
-    "eslint": "^9.0.0",
-    "eslint-config-prettier": "^9.1.0",
-    "eslint-plugin-cypress": "^3.5.0",
+    "eslint": "^10.11.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-cypress": "^7.0.2",
     "prettier": "^3.3.0",
     "rimraf": "^6.0.1",
     "typescript": "^5.5.0",

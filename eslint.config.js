@@ -2,7 +2,7 @@
 /**
  * ESLint flat config for the Cypress + TypeScript project.
  *
- * ESLint 9 uses the flat config format (eslint.config.js) by default.
+ * ESLint 10 (flat config is the only format — eslint.config.js).
  */
 const js = require('@eslint/js')
 const tseslint = require('typescript-eslint')
