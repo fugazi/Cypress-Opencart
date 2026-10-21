@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/fugazi/Cypress-Opencart#readme",
   "engines": {
-    "node": ">=20"
+    "node": ">=22.23.4"
   },
   "scripts": {
     "cy:open": "cypress open",
